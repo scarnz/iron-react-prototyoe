@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    letter-spacing:  0.015em;
+  }
+}
+
+
+#comparablesChart {
+  /*background:  red;*/
+  height:  100%;
+  width:  100%;
+}
+
+#comparablesChart .y.axis .tick, #comparablesChart .x.axis .tick {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #000000;
+  opacity: 0.7;
+}
+
+/*.h-124 {
+  height: 31rem;
+}*/
+
+#chartUpdateLink {
+  opacity:  0.7;
+  text-decoration:  underline;
+}
+
+#chartUpdateLink:hover {
+  opacity:  1;
+}
