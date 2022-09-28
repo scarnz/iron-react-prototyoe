@@ -1,6 +1,44 @@
+import {useEffect, useState} from 'react';
 export default function ChartWrapper() {
-  return (
 
+  useEffect(() => {
+    let data = [window.depreciationData, window.depreciationData2];
+
+    // This represents the react component element.
+    let element = document.getElementById('comparablesChart');
+    // // Initialize the chart. This is how the chart will be
+    // // rendered on the page/element with it's initial data set.
+    ComparablesChart.init(element, data[0]);
+
+    // This is how we'll transmit data from click events within
+    // the chart, back to the react component. Each event will
+    // have a custom name, prefixed with 'chartEvent', i.e.
+    // 'chartEvent-exportToggle', for when we use the cards in
+    // the chart as toggles for what entries to add/remove from
+    // data export.
+    // Getting data from these events requires using the 'detail'
+    // property of the event object.
+    element.addEventListener("chartEvent", (event) => {
+      console.log('CHART EVENT RECEIVED:', event.detail);
+      // do stuff
+    });
+
+    let updateLink = document.getElementById('chartUpdateLink');
+    if(updateLink){
+      updateLink.addEventListener('click', (e) => {
+
+        let currData = Number(e.target.getAttribute('data-dataset')),
+            newDataIndex = currData === 0 ? 1 : 0;
+
+        e.target.setAttribute('data-dataset', newDataIndex);
+        ComparablesChart.update(data[newDataIndex]);
+
+        e.preventDefault()
+      });
+    }
+  });
+
+  return (
     <>
       {/* Chart Wrapper   */}
       <div className="relative w-full flex flex-col xl:ml-3 py-0 px-2 sm:px-0 md:px-0">
@@ -83,8 +121,6 @@ export default function ChartWrapper() {
         </aside>
 
 
-
-
         {/* Chart Height Wrapper */}
         <div className="height-wrapper relative h-80 md:h-96 xl:h-108 mb-6 bg-red-100">
           {/* Inner Legend */}
@@ -118,9 +154,6 @@ export default function ChartWrapper() {
         </div>
       </div>
       {/* /End chart area */}
-
-
-
     </>
   )
 };

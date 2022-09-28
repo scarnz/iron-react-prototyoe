@@ -6,6 +6,9 @@ import Header from "./components/Header"
 import ChartValueTabs from "./components/ChartValueTabs"
 import ChartFiltersWrapper from "./components/ChartFiltersWrapper"
 import ComparablesTabs from "./components/ComparablesTabs"
+import CardSelectSort from "./components/CardSelectSort"
+import ComparablesCardList from "./components/ComparablesCardList"
+import Footer from "./components/Footer"
 
 
 export default function App() {
@@ -18,6 +21,10 @@ export default function App() {
       <ChartValueTabs />
       <ChartFiltersWrapper />
       <ComparablesTabs />
+      <CardSelectSort />
+      <ComparablesCardList />
+      
+      <Footer />
     </>
   );
 }
