@@ -1,5 +1,5 @@
 
-
+Simple Prototyping App Using Vite/Yarn/React
 
 
 To Get Going:
@@ -29,3 +29,7 @@ or
 
 npx tailwindcss-cli -i ./src/css/input.css -o ./src/css/output.css --watch
 
+
+
+Guide to React Setup using Vite:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-react-project-with-vite
