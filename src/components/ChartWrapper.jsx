@@ -40,36 +40,8 @@ export default function ChartWrapper() {
 
   return (
     <>
-      {/* Chart Wrapper   */}
-      <div className="relative w-full flex flex-col xl:ml-3 py-0 px-2 sm:px-0 md:px-0">
-
-        {/* Chart Legend */}
-      {/*             <aside className="relative flex w-full mt-6 sm:mt-0 g-amber-300">
-          <div className="absolute sm:static flex flex-0 items-center h-9 w-22 -mt-8 sm:mt-0 mr-4 g-red-300">
-            <span className="ml-0 text-sm text-gray-600 font-medium leading-tight whitespace-nowrap">Guide Values</span>
-          </div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 max-w-2xl w-full gap-x-12 px-4 sm:px-0 md:gap-x-2 g-red-400">
-        
-            <div className="flex flex-col flex-col-reverse md:flex-row h-8 items-center g-blue-400">
-              <div className="w-16 md:w-12 h-px m-1 border-b-[3px] border-dashed border-sky-300"></div>
-              <span className="md:ml-2 text-xs text-bold leading-tight">Wholesale</span>
-            </div>
-
-            <div className="flex flex-col flex-col-reverse md:flex-row h-8 items-center g-white">
-              <div className="w-16 md:w-12 h-px m-1 border-b-[3px] border-red-400"></div>
-              <span className="md:ml-2 text-xs text-bold leading-tight whitespace-nowrap">Resale Cash</span>
-            </div>
-
-            <div className="flex flex-col flex-col-reverse md:flex-row h-8 items-center g-blue-300">
-              <div className="w-16 md:w-12 h-px m-1 border-b-[3px] border-dashed border-amber-400"></div>
-              <span className="md:ml-2 text-xs text-bold leading-tight">Advertised</span>
-            </div>
-
-          </div>              
-        </aside>
-      */}
-
+      {/* Chart + Control Panel Wrapper   */}
+      <div id="chartControlsWrapper" className="relative w-full flex flex-col xl:ml-3 py-0 px-2 sm:px-0 md:px-0">
         <aside className="relative w-full flex items-start mt-9 sm:mt-0 mb-1 sm:pr-10 g-amber-400">
           <div className="absolute sm:relative flex flex-0 items-center h-9 -22 -mt-8 sm:mt-0 mr-4 g:mr-6 ml-3">
             <span className="text-xs text-gray-600 font-medium leading-tight sm:whitespace-nowrap">Sold Reports & Listings</span>
@@ -122,7 +94,7 @@ export default function ChartWrapper() {
 
 
         {/* Chart Height Wrapper */}
-        <div className="height-wrapper relative h-80 md:h-96 xl:h-108 mb-6 bg-red-100">
+        <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6 bg-red-100">
           {/* Inner Legend */}
 
           <aside className="hidden sm:flex absolute -3/4 top-1 left-3 rounded bg-milk-75">

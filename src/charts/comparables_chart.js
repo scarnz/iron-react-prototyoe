@@ -32,6 +32,9 @@ const ComparablesChart = (() => {
       filtersPanel,
       width,
       height,
+      // chartControlsWrapper,
+      // wrapperStyles,
+      // wrapperPageMargin,
       isXL,
       margin = {top: 1, right: 65, bottom: 40, left: 1},
       breakpoints = {xl: 1280},
@@ -83,7 +86,7 @@ const ComparablesChart = (() => {
     setData(data);
 
     el = element;
-    wrapper = el.closest('.chart-filters-wrapper');
+    wrapper = document.getElementById('chartFiltersWrapper');
     filtersPanel = document.getElementById('filtersPanel');
 
     width = wrapper.offsetWidth - margin.left - margin.right;
@@ -481,9 +484,18 @@ const ComparablesChart = (() => {
     let newWidth = wrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
+    let chartControlsWrapper = document.getElementById('chartControlsWrapper'),
+        wrapperStyles = window.getComputedStyle(chartControlsWrapper),
+        wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
+
+        console.log(wrapperPageMargin);
+        console.log(filtersPanel.offsetWidth);
+        console.log(newWidth);
+
+
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isXL){
-      newWidth = (newWidth - filtersPanel.offsetWidth);
+      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPageMargin);
     }
 
     if(Math.abs(newWidth - width) > 5){
