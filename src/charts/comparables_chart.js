@@ -27,9 +27,14 @@ const ComparablesChart = (() => {
       redMedium = '#F87171';
 
   // define/scope some dimension vars
-  let width,
+  let el,
+      wrapper,
+      filtersPanel,
+      width,
       height,
+      isXL,
       margin = {top: 1, right: 65, bottom: 40, left: 1},
+      breakpoints = {xl: 1280},
       bandWidth,
       animationDuration = 250,
       lineStrokeWidth = 3;
@@ -65,21 +70,29 @@ const ComparablesChart = (() => {
 
   ////////////////////////////////
   // PUBLIC
-  const init = (el, data) => {
-    if(el === null){
+  const init = (element, data) => {
+    if(element === null){
       console.log('CHART: ELEMENT CANNOT BE NULL');
       return false;
     }
-
     // emptyElement(el);
     if(_chartInitialized) return false;
-    console.log('CHART: init');    
-    
+    console.log('CHART: init');
+
     _chartInitialized = true;
     setData(data);
 
-    width = el.offsetWidth - margin.left - margin.right;
+    el = element;
+    wrapper = el.closest('.chart-filters-wrapper');
+    filtersPanel = document.getElementById('filtersPanel');
+
+    width = wrapper.offsetWidth - margin.left - margin.right;
     height = el.offsetHeight - margin.top - margin.bottom;
+
+    isXL = (document.body.clientWidth >= breakpoints.xl);
+    if(isXL){
+      width = (width - filtersPanel.offsetWidth);
+    }
 
     setScales();
     setLines();
@@ -98,11 +111,11 @@ const ComparablesChart = (() => {
     drawLines();
 
     // listeners
-    el.addEventListener('chartResize', (e) => {
-      resizeChart(el);
+    wrapper.addEventListener('chartResize', (e) => {
+      resizeChart();
     }, false);
 
-    chartResizer.observe(el);
+    chartResizer.observe(wrapper);
   };
 
   const update = (data) => {
@@ -462,14 +475,18 @@ const ComparablesChart = (() => {
         .attr('d', wholesaleLine);
   };
 
-  function resizeChart(el) {
+  function resizeChart() {
     if(!_chartInitialized) return false;
 
-    let newWidth = el.offsetWidth - margin.left - margin.right,
+    let newWidth = wrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
-    // if(Math.abs(newWidth - width) > (margin.right/2)){
-    if(Math.abs(newWidth - width) > 10 || Math.abs(newHeight - height) > 10){
+    isXL = (document.body.clientWidth >= breakpoints.xl);
+    if(isXL){
+      newWidth = (newWidth - filtersPanel.offsetWidth);
+    }
+
+    if(Math.abs(newWidth - width) > 5){
       console.log('CHART: resize chart!');
       width = newWidth;
       height = newHeight;
