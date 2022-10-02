@@ -17,9 +17,14 @@ export default function ChartValueTabs() {
           <nav className="flex space-x-3">
             {/*} Current: "border-blue-900 text-blue-900", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" */}
 
-            <a href="#" className="flex w-1/2 sm:w-40 lg:w-48 xl:w-[221px] justify-center bg-blue-900 border-blue-900 text-white whitespace-nowrap pt-4 pb-3 px-10 border-b-2 rounded-t-md font-medium text-base" aria-current="page">Chart</a>
+            <a href="#" className="flex w-1/2 sm:w-40 lg:w-48 xl:w-[221px] justify-center items-center bg-blue-900 border-blue-900 text-white whitespace-nowrap pt-4 pb-3 px-10 border-b-2 rounded-t-md font-medium text-base" aria-current="page">
+              Chart
+            </a>
 
-            <a href="#" className="flex w-1/2 sm:w-40 lg:w-48 xl:w-[221px] justify-center bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-600 rounded-t-md whitespace-nowrap pt-4 pb-3 px-10 font-medium text-base">Values Table</a>
+            <a href="#" className="flex w-1/2 sm:w-40 lg:w-48 xl:w-[221px] justify-center items-center bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-600 rounded-t-md whitespace-nowrap pt-4 pb-3 px-10 font-medium text-base">
+              Values Table
+              <span className="hidden bg-gray-50 text-gray-500 border border-slate-200 ml-3 py-0.5 px-2.5 rounded-full text-sm font-medium md:inline-flex items-center justify-center">4</span>
+            </a>
 
           </nav>
         </div>

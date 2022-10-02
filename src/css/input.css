@@ -8,7 +8,6 @@
   }
 }
 
-
 #comparablesChart {
   /*background:  red;*/
   height:  100%;
@@ -29,11 +28,11 @@
   height: 31rem;
 }*/
 
-#chartUpdateLink {
+/*#chartUpdateLink {
   opacity:  0.7;
   text-decoration:  underline;
-}
+}*/
 
 #chartUpdateLink:hover {
-  opacity:  1;
+  opacity:  0.8;
 }
