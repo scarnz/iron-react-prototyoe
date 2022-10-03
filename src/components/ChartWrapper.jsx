@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react'
-import ChartControls from './ChartControls'
+import {useEffect, useState} from 'react';
+import ChartControls from './ChartControls';
 
 export default function ChartWrapper() {
 

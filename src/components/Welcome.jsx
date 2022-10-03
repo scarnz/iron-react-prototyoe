@@ -1,4 +1,4 @@
-import S670 from "../img/S670.jpeg"
+import S670 from "../img/S670.jpeg";
 
 export default function Welcome() {
   return (

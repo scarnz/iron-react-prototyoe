@@ -1,6 +1,6 @@
 
-import ChartWrapper from './ChartWrapper'
-import Filters from './Filters'
+import ChartWrapper from './ChartWrapper';
+import Filters from './Filters';
 
 export default function ChartFiltersWrapper() {
   return (

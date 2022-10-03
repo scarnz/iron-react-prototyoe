@@ -1,4 +1,4 @@
-import ComparablesCardContent from './ComparablesCardContent'
+import ComparablesCardContent from './ComparablesCardContent';
 
 export default function ComparablesCardAuction() {
   return (

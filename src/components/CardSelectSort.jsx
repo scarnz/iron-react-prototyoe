@@ -43,7 +43,7 @@ export default function CardSelectSort() {
                 Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"
               */}
 
-              {/*  <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+              <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                 <div className="py-1" role="none">
                   <a href="#" className="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Listing Type</a>
 
@@ -53,7 +53,7 @@ export default function CardSelectSort() {
 
                   <a href="#" className="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Distance</a>
                 </div>
-              </div> */}
+              </div> 
             </div>
           </div>
         </div>

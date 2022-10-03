@@ -1,16 +1,16 @@
-import { ArrowsPointingOutIcon } from '@heroicons/react/20/solid'
-import { ArrowsPointingInIcon } from '@heroicons/react/20/solid'
+import { ArrowsPointingOutIcon } from '@heroicons/react/20/solid';
+import { ArrowsPointingInIcon } from '@heroicons/react/20/solid';
 
 export default function ChartControls() {
 
 	return (
 
-    <aside id="ChartControls" className="relative w-full flex items-center justify-between mt-9 sm:mt-0 mb-3">
+    <aside id="ChartControls" className="relative w-full flex items-center justify-start mt-9 sm:mt-0 mb-3">
       <div className="absolute sm:relative flex flex-0 items-center h-9 -22 -mt-8 sm:mt-0 mr-4 g:mr-6 ml-3">
         <span className="text-xs text-gray-600 font-medium leading-tight sm:whitespace-nowrap">Reports & Listings</span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:max-w-2xl w-full gap-x-3 gap-y-2 xxxmb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:max-w-2xl w-full gap-x-3 gap-y-2 mr-3">
       
         <div className="flex flex-1 flex-row justify-start items-center border border-slate-200 bg-gray-50 hover:bg-gray-100 rounded hadow">
           <label htmlFor="my-sold-1" className="flex items-center w-full py-2 pl-2 pr-3 space-x-2 text-xs text-gray-700 cursor-pointer">
@@ -54,7 +54,7 @@ export default function ChartControls() {
         </div>
       </div>
 
-      <button id="fullScreenToggle" className="w-9 h-9 ml-3 flex flex-shrink-0 flex-row justify-center items-center border border-slate-200 bg-gray-50 hover:bg-gray-100 rounded hadow">
+      <button id="fullScreenToggle" className="w-9 h-full md:h-9 ml-auto flex flex-shrink-0 flex-row justify-center items-center border border-slate-200 bg-gray-50 hover:bg-gray-100 rounded hadow">
         <ArrowsPointingOutIcon className="h-5 w-5 text-gray-500"/>
         {/*When active, use:
         <ArrowsPointingInIcon className="h-5 w-5 text-gray-500"/>*/}

@@ -1,7 +1,7 @@
-import ComparablesCardSold from './ComparablesCardSold'
-import ComparablesCardAuction from './ComparablesCardAuction'
-import ComparablesCardMySold from './ComparablesCardMySold'
-import ComparablesCardAdvertised from './ComparablesCardAdvertised'
+import ComparablesCardSold from './ComparablesCardSold';
+import ComparablesCardAuction from './ComparablesCardAuction';
+import ComparablesCardMySold from './ComparablesCardMySold';
+import ComparablesCardAdvertised from './ComparablesCardAdvertised';
 
 export default function ComparablesCardList() {
   return (
