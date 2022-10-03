@@ -1,5 +1,5 @@
-import BreakpointIndicator from './BreakpointIndicator'
-import ChartUpdateLink from './ChartUpdateLink'
+import BreakpointIndicator from './BreakpointIndicator';
+import ChartUpdateLink from './ChartUpdateLink';
 
 
 export default function DevTray() {
