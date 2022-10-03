@@ -33,3 +33,9 @@ npx tailwindcss-cli -i ./src/css/input.css -o ./src/css/output.css --watch
 
 Guide to React Setup using Vite:
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-react-project-with-vite
+
+
+
+
+React Router Tutorial:
+https://medium.com/@andrew.smith_84400/simple-react-js-routing-for-beginners-ca3d9e113f1a
