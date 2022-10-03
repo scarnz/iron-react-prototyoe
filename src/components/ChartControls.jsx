@@ -5,7 +5,7 @@ export default function ChartControls() {
 
 	return (
 
-    <aside id="ChartControls" className="relative w-full flex items-center justify-between mt-9 sm:mt-0 mb-3">
+    <aside id="chartControls" className="relative w-full flex items-center justify-between mt-9 sm:mt-0 mb-3">
       <div className="absolute sm:relative flex flex-0 items-center h-9 -22 -mt-8 sm:mt-0 mr-4 g:mr-6 ml-3">
         <span className="text-xs text-gray-600 font-medium leading-tight sm:whitespace-nowrap">Reports & Listings</span>
       </div>
@@ -56,9 +56,9 @@ export default function ChartControls() {
 
       <button id="fullScreenToggle" className="w-9 h-9 ml-3 flex flex-shrink-0 flex-row justify-center items-center border border-slate-200 bg-gray-50 hover:bg-gray-100 rounded hadow">
         <ArrowsPointingOutIcon className="h-5 w-5 text-gray-500"/>
-        {/*When active, use:
-        <ArrowsPointingInIcon className="h-5 w-5 text-gray-500"/>*/}
-
+        
+{/*        <ArrowsPointingInIcon className="h-5 w-5 text-gray-500"/>
+*/}
       </button>  
 
     </aside>

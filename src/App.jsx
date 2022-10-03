@@ -21,8 +21,8 @@ import TabsTest from "./components/TabsTest"
 export default function App() {
   return (
     <>
-      <DevTray />
-
+{/*      <DevTray />
+*/}
       <TopNav />
       <SidebarNav />
 

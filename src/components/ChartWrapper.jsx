@@ -49,7 +49,7 @@ export default function ChartWrapper() {
         <ChartControls />
 
         {/* Chart Height Wrapper */}
-        <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6">
+        <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6 min-h-[100px]">
           {/* Inner Legend */}
 
           <aside className="hidden sm:flex absolute -3/4 top-1 left-3 rounded bg-milk-75">

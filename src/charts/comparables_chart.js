@@ -481,21 +481,62 @@ const ComparablesChart = (() => {
   function resizeChart() {
     if(!_chartInitialized) return false;
 
-    let newWidth = wrapper.offsetWidth - margin.left - margin.right,
-        newHeight = el.offsetHeight - margin.top - margin.bottom;
+    // Gets the padding for the ChartFiltersWrapper element, 
+    // which changes when full screen mode is toggled, 
+    // and at all breakpoints must be subtracted to calculate the correct chart width
+    let chartFiltersWrapper = document.getElementById('chartFiltersWrapper'),
+        fullScreenStyles = window.getComputedStyle(chartFiltersWrapper),
+        chartFiltersPadding = parseInt(fullScreenStyles.paddingLeft) + parseInt(fullScreenStyles.paddingRight);
+        // console.log(chartFiltersPadding);
 
+
+    // Gets the padding between the chart and the filters panel, when filters panel is on the left side
     let chartControlsWrapper = document.getElementById('chartControlsWrapper'),
         wrapperStyles = window.getComputedStyle(chartControlsWrapper),
         wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
 
-        console.log(wrapperPageMargin);
-        console.log(filtersPanel.offsetWidth);
-        console.log(newWidth);
+        // console.log(wrapperPageMargin);
+        // console.log(filtersPanel.offsetWidth);
+        // console.log(newWidth);
+
+    // Gets the height of all non-chart elements and the vertical space between them,
+    // Which is needed for full screen mode when chart and filtersPanel are stacked.
+    // First, the chart controls bar
+    let chartControls = document.getElementById('chartControls'),
+        controlHeight = chartControls.offsetHeight,
+        controlMargin = parseInt(window.getComputedStyle(chartControls).marginBottom),
+        controlHeightTotal = controlHeight + controlMargin;
+        console.log('controlHeightTotal is ' + controlHeightTotal);
+
+    // The filters panel height
+    let filtersMargin = parseInt(window.getComputedStyle(filtersPanel).marginBottom),
+        filtersHeightTotal = filtersPanel.offsetHeight + filtersMargin;
+        console.log('filtersHeightTotal is ' + filtersHeightTotal);
+
+    let heightWrapper = document.getElementById('heightWrapper'),
+        heightWrapperMargin = parseInt(window.getComputedStyle(heightWrapper).marginBottom);
+        console.log('heightWrapperMargin is ' + heightWrapperMargin);
 
 
+    // Standard chart size calculators
+    let newWidth = wrapper.offsetWidth - margin.left - margin.right - chartFiltersPadding;
+    let newHeight = el.offsetHeight - margin.top - margin.bottom;
+
+    // Full Screen Height calculator for when stacked only
+    // window.innerHeight - 2 * chartFiltersPadding - controlHeightTotal - filtersHeightTotal - heightWrapperMargin
+
+    // let newHeight = window.innerHeight - 2 * chartFiltersPadding - controlHeightTotal - filtersHeightTotal - heightWrapperMargin;
+
+    // Full Screen Height calculator for XL and up
+
+    // let newHeight = window.innerHeight - 2 * chartFiltersPadding - controlHeightTotal - 2 * heightWrapperMargin;
+
+
+
+    // XLarge breakpoint chart size calulator
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isXL){
-      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPageMargin);
+      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPageMargin - chartFiltersPadding);
     }
 
     if(Math.abs(newWidth - width) > 5){
