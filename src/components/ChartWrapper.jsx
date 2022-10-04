@@ -26,6 +26,7 @@ export default function ChartWrapper() {
     });
 
     let updateLink = document.getElementById('chartUpdateLink');
+    console.log(updateLink);
     if(updateLink){
       updateLink.addEventListener('click', (e) => {
 
@@ -36,6 +37,7 @@ export default function ChartWrapper() {
         ComparablesChart.update(data[newDataIndex]);
 
         e.preventDefault()
+        console.log(e.target);
       });
     }
   });
