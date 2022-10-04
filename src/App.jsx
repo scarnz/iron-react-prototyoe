@@ -4,18 +4,18 @@ import DevTray from "./components/util/DevTray";
 import TopNav from "./components/TopNav";
 import SidebarNav from "./components/SidebarNav";
 
-
 import EquipSummary from "./components/EquipSummary";
 import Header from "./components/Header";
-import ComparablesChartValuesTabs from "./components/ComparablesChartValuesTabs";
 
-import ChartFiltersWrapper from "./components/ChartFiltersWrapper";
-import ValuesTableWrapper from "./components/ValuesTableWrapper";
-import ComparablesCardSelectSort from "./components/ComparablesCardSelectSort";
-import ComparablesCardList from "./components/ComparablesCardList";
-import Footer from "./components/Footer";
+import HeadlessTabs from "./components/HeadlessTabs";
 
 import ComparablesCardTabs from "./components/ComparablesCardTabs";
+import ComparablesCardSelectSort from "./components/ComparablesCardSelectSort";
+import ComparablesCardList from "./components/ComparablesCardList";
+
+import Footer from "./components/Footer";
+
+
 
 
 
@@ -35,9 +35,8 @@ export default function App() {
         <section id="comparablesContent" className="flex-1 px-0 sm:px-4 2xl:px-6">
 
           <Header />
-          <ComparablesChartValuesTabs />
-          <ValuesTableWrapper />
-          <ChartFiltersWrapper />
+          <HeadlessTabs />
+
           <ComparablesCardTabs />
           <ComparablesCardSelectSort />
           <ComparablesCardList />

@@ -1,7 +1,7 @@
 export default function ValuesTableWrapper() {
 
 	return (
-		<div data-tabs-content="2" className="">
+		<div data-tabs-content="2" className="mb-12">
 			
 			{/*ValuesTable*/}
 		  <div className="py-0 sm:py-0 sm:grid sm:grid-cols-4 sm:gap-0">
