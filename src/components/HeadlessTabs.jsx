@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react';
 import ChartFiltersWrapper from "./ChartFiltersWrapper";
 import ValuesTableWrapper from "./ValuesTableWrapper";
 
-const allTheTabs = [
+const allTheTabsInfo = [
   { name: 'Chart' },
   { name: 'Values Table', count: '4' }
 ]
@@ -13,10 +13,11 @@ function classNameCruncher(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function MyTabs() {
+export default function ChartValueTabs() {
   return (
     <Tab.Group
       manual={true}
+      defaultIndex={0}
       onChange={(index) => {
         console.log('Changed selected tab to:', index)
       }}
@@ -24,7 +25,7 @@ export default function MyTabs() {
       <aside id="comparablesChartValuesTabs" className="flex w-full border-b-[3px] border-blue-900">
 
         <Tab.List className="flex w-full mx-2 sm:mx-0 space-x-3">
-          {allTheTabs.map((myTab) => (
+          {allTheTabsInfo.map((myTab) => (
             
             <Tab as={Fragment} >
               {({ selected }) => (

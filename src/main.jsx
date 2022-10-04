@@ -7,7 +7,6 @@ import App from './App';
   //   <App />
   // </React.StrictMode>
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <App />
 )

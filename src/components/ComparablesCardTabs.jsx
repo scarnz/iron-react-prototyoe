@@ -1,69 +1,179 @@
-const tabs = [
-  { name: 'My Sold', href: '#', count: '1', current: false },
-  { name: 'Sold', href: '#', count: '1', current: false },
-  { name: 'Auction', href: '#', count: '1', current: false },
-  { name: 'Advertised', href: '#', count: '1', current: false },
-  { name: 'My Comparables', href: '#', count: '4', current: true }
+// Based on HeadlessUI Tabs component
+// See API here: https://headlessui.com/react/tabs#component-api
+
+import { Fragment } from 'react';
+import { Tab } from '@headlessui/react';
+
+import ComparablesCardSelectSort from "./ComparablesCardSelectSort";
+import ComparablesCardMySold from './ComparablesCardMySold';
+import ComparablesCardSold from './ComparablesCardSold';
+import ComparablesCardAuction from './ComparablesCardAuction';
+import ComparablesCardAdvertised from './ComparablesCardAdvertised';
+
+const allTheTabsInfo = [
+  { name: 'My Sold', href: '#', count: '5' },
+  { name: 'Auction', href: '#', count: '8' },
+  { name: 'Sold', href: '#', count: '26' },
+  { name: 'Advertised', href: '#', count: '32' },
+  { name: 'My Comparables', href: '#', count: '4' }
 ]
 
-function classNames(...classes) {
+function classNameCruncher(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ComparablesCardTabs() {
   return (
-    <aside id="comparablesCardTabs" className="flex w-full border-b-[3px] border-blue-900 mb-2">
+    <Tab.Group
+      manual={true}
+      defaultIndex={0}
+      onChange={(index) => {
+        console.log('Changed selected tab to:', index)
+      }}
+    >
+      <aside id="comparablesCardTabs" className="hidden sm:flex w-full border-b-[3px] border-blue-900">
 
-      {/* Dropdown menu on mobile screens */}
-      <div className="sm:hidden mx-auto mb-2">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-        <select
-          id="tabs"
-          name="tabs"
-          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-          defaultValue={tabs.find((tab) => tab.current).name}
-        >
-          {tabs.map((tab) => (
-            <option key={tab.name}>{tab.name}</option>
-          ))}
-        </select>
-      </div>
-
-      {/* Tabs at small breakpoint and up */}
-      <div className="hidden sm:block w-full">
-        <nav className="flex space-x-3 md:space-x-2 lg:space-x-3 max-w-6xl" aria-label="Tabs">
-          {tabs.map((tab) => (
-            <a
-              key={tab.name}
-              href="#"
-              className={classNames(
-                tab.current
-                  ? 'bg-blue-900 border-blue-900 text-white border-b-2 rounded-t-md'
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-t-md hover:text-gray-700',
-                'group whitespace-nowrap flex flex-1 justify-center pt-4 pb-3 px-1 md:px-1 lg:px-2 xl:px-4 font-medium text-sm md:text-xs lg:text-base'
-              )}
-              aria-current={tab.current ? 'page' : undefined}
-            >
-              {tab.name}
-              {tab.count ? (
-                <span
-                  className={classNames(
-                    tab.current 
-                      ? 'bg-blue-800 text-white' 
-                      : 'bg-gray-200 text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700',
-                    'hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium'
+        <Tab.List className="flex w-full mx-2 sm:mx-0 space-x-3">
+          {allTheTabsInfo.map((myTab) => (
+            
+            <Tab as={Fragment} >
+              {({ selected }) => (
+                /* Use the `selected` state to conditionally style the selected tab. */
+                <a
+                  // key={myTab.name}
+                  className={classNameCruncher(
+                    selected 
+                      ? 'bg-blue-900 text-white' 
+                      : 'bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-700',
+                    'group outline-0 focus:ring-[3px] ring-inset cursor-pointer whitespace-nowrap rounded-t-md flex w-1/2 sm:w-40 lg:w-48 xl:w-[221px] justify-center pt-4 pb-3 px-1 md:px-1 lg:px-2 xl:px-4 font-medium text-sm md:text-xs lg:text-base'
                   )}
                 >
-                  {tab.count}
-                </span>
-              ) : null}
-            </a>
+                  {myTab.name}
+                  {myTab.count ? (
+                    <span
+                      className={classNameCruncher(
+                        selected 
+                          ? 'bg-blue-800 text-white' 
+                          : 'bg-gray-200 text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700',
+                        'hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium'
+                      )}
+                    >
+                      {myTab.count}
+                    </span>
+                  ) : null}
+                </a>
+
+              )}
+            </Tab>
           ))}
-        </nav>
-      </div>
-    </aside>
+
+        </Tab.List>
+      </aside>
+
+			<ComparablesCardSelectSort />
+
+      <Tab.Panels className="tabs-panels">
+
+        <Tab.Panel 
+	        as={'ul'}
+	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        >
+	       
+	        {
+				    Array.from({length: 5})
+				        .map((_, index) => (
+			            <ComparablesCardMySold key={index} />
+				        )
+				    )
+					}
+        </Tab.Panel>
+
+        <Tab.Panel 
+	        as={'ul'}
+	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        >
+	       
+	        {
+				    Array.from({length: 8})
+				        .map((_, index) => (
+			            <ComparablesCardAuction key={index} />
+				        )
+				    )
+					}
+        </Tab.Panel>
+
+        <Tab.Panel 
+	        as={'ul'}
+	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        >
+	       
+	        {
+				    Array.from({length: 26})
+				        .map((_, index) => (
+			            <ComparablesCardSold key={index} />
+				        )
+				    )
+					}
+        </Tab.Panel>
+
+        <Tab.Panel 
+	        as={'ul'}
+	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        >
+	       
+	        {
+				    Array.from({length: 32})
+				        .map((_, index) => (
+			            <ComparablesCardAdvertised key={index} />
+				        )
+				    )
+					}
+        </Tab.Panel>
+
+        <Tab.Panel 
+	        as={'ul'}
+	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        >
+					<ComparablesCardSold />
+					<ComparablesCardAuction />
+					<ComparablesCardMySold />
+					<ComparablesCardAdvertised />
+
+        </Tab.Panel>
+
+
+
+      </Tab.Panels>
+
+
+
+    </Tab.Group>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

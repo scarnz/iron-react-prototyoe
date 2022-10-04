@@ -1,3 +1,5 @@
+import ComparablesViewAsMenu from './ComparablesViewAsMenu';
+
 import ComparablesCardSortMenu from './ComparablesCardSortMenu';
 
 export default function ComparablesCardSelectSort() {
@@ -16,10 +18,9 @@ export default function ComparablesCardSelectSort() {
         </button>
 
         <div className="col-start-1 row-start-1 py-4 ml-auto">
-          <div className="mx-auto flex max-w-7xl justify-end px-4 sm:px-6 lg:px-8">
-
+          <div className="mx-auto flex max-w-7xl justify-end space-x-3 px-4 sm:px-6 lg:px-8">
+            <ComparablesViewAsMenu />
             <ComparablesCardSortMenu />
-
           </div>
         </div>
       </aside>
