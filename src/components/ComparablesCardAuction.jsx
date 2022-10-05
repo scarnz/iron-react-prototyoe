@@ -1,9 +1,10 @@
 import ComparablesCardContent from './ComparablesCardContent';
+// import 'S670-2.jpeg' from '../img/S670-2.jpeg';
 
 export default function ComparablesCardAuction() {
   return (
     <>
-      <li className="col-span-1 relative bg-white rounded-md shadow hover:shadow-md hover:scale-[1.015]">
+      <li className="group col-span-1 relative bg-white rounded-md shadow hover:shadow-md hover:scale-[1.015]">
         <div className="relative flex w-full bg-gray-100">
           
           <div className="flex flex-row w-full justify-between items-center rounded-t-md bg-sky-300 pr-3 hover:mix-blend-multiply">
@@ -16,7 +17,7 @@ export default function ComparablesCardAuction() {
           </div>
 
         </div>
-        <img className="w-full saturate-50 bg-gray-300" src="https://images.ironsearch.com/dealers/308/37/95060/machines/204577599_7069606567.jpeg?w=600&h=600" alt="" />
+        <img className="w-full saturate-50 group-hover:saturate-100 bg-gray-300" src={"./src/img/S670-2.jpeg"} alt="John Deere combine" />
 
         
         <ComparablesCardContent />

@@ -5,9 +5,13 @@ import TopNav from "./components/TopNav";
 import SidebarNav from "./components/SidebarNav";
 
 import EquipSummary from "./components/EquipSummary";
+
 import Header from "./components/Header";
 
-import ChartValueTabs from "./components/HeadlessTabs";
+import ChartValuesTabs from "./components/ChartValuesTabs";
+
+import ComparablesMatchMsg from './components/ComparablesMatchMsg';
+
 
 import ComparablesCardTabs from "./components/ComparablesCardTabs";
 
@@ -33,9 +37,8 @@ export default function App() {
 
         <section id="comparablesContent" className="flex-1 px-0 sm:px-4 2xl:px-6">
           <Header />
-
-          <ChartValueTabs />
-
+          <ChartValuesTabs />
+          <ComparablesMatchMsg />
           <ComparablesCardTabs />
         </section>
 

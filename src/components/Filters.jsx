@@ -22,7 +22,7 @@ export default function Filters() {
               </button>
             </span>
 
-            <span className="flex items-center rounded-full bg-gray-200 border border-blue-200 py-1 pl-4 pr-1 text-xs font-medium text-gray-600">
+            {/*<span className="flex items-center rounded-full bg-gray-200 border border-blue-200 py-1 pl-4 pr-1 text-xs font-medium text-gray-600">
               <span>Lorem Ipsum</span>
               <button type="button" className="ml-1 inline-flex items-center justify-center h-6 w-6 flex-shrink-0 rounded-full text-gray-400 hover:bg-white hover:text-gray-500">
                 <span className="sr-only">Remove this filter</span>
@@ -40,7 +40,7 @@ export default function Filters() {
                   <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
                 </svg>
               </button>
-            </span>
+            </span>*/}
           </div>
 
 

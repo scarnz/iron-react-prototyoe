@@ -10,6 +10,7 @@ import ComparablesCardSold from './ComparablesCardSold';
 import ComparablesCardAuction from './ComparablesCardAuction';
 import ComparablesCardAdvertised from './ComparablesCardAdvertised';
 
+
 const allTheTabsInfo = [
   { name: 'My Sold', href: '#', count: '5' },
   { name: 'Auction', href: '#', count: '8' },

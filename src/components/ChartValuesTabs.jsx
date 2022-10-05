@@ -6,14 +6,14 @@ import ValuesTableWrapper from "./ValuesTableWrapper";
 
 const allTheTabsInfo = [
   { name: 'Chart' },
-  { name: 'Values Table', count: '4' }
+  { name: 'Values Table', count: '6' }
 ]
 
 function classNameCruncher(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ChartValueTabs() {
+export default function ChartValuesTabs() {
   return (
     <Tab.Group
       manual={true}
