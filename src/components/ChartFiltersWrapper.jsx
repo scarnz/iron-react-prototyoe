@@ -3,6 +3,7 @@ import ChartWrapper from './ChartWrapper';
 import Filters from './Filters';
 
 export default function ChartFiltersWrapper() {
+
   return (
     <>
       {/*Toggle classes for full screen effect

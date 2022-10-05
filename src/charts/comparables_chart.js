@@ -32,9 +32,9 @@ const ComparablesChart = (() => {
       filtersPanel,
       width,
       height,
-      // chartControlsWrapper,
-      // wrapperStyles,
-      // wrapperPageMargin,
+      chartControlsWrapper,
+      wrapperStyles,
+      wrapperPageMargin,
       isXL,
       margin = {top: 1, right: 65, bottom: 40, left: 1},
       breakpoints = {xl: 1280},
@@ -78,8 +78,8 @@ const ComparablesChart = (() => {
       console.log('CHART: ELEMENT CANNOT BE NULL');
       return false;
     }
-    // emptyElement(el);
-    if(_chartInitialized) return false;
+    // emptyElement(element);
+    // if(_chartInitialized) return false;
     console.log('CHART: init');
 
     _chartInitialized = true;
@@ -88,13 +88,16 @@ const ComparablesChart = (() => {
     el = element;
     wrapper = document.getElementById('chartFiltersWrapper');
     filtersPanel = document.getElementById('filtersPanel');
+    chartControlsWrapper = document.getElementById('chartControlsWrapper');
 
     width = wrapper.offsetWidth - margin.left - margin.right;
     height = el.offsetHeight - margin.top - margin.bottom;
 
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isXL){
-      width = (width - filtersPanel.offsetWidth);
+      wrapperStyles = window.getComputedStyle(chartControlsWrapper);
+      wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
+      width = (width - filtersPanel.offsetWidth - wrapperPageMargin);
     }
 
     setScales();
@@ -115,6 +118,7 @@ const ComparablesChart = (() => {
 
     // listeners
     wrapper.addEventListener('chartResize', (e) => {
+      if(!_chartInitialized) return false;
       resizeChart();
     }, false);
 
@@ -484,17 +488,10 @@ const ComparablesChart = (() => {
     let newWidth = wrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
-    let chartControlsWrapper = document.getElementById('chartControlsWrapper'),
-        wrapperStyles = window.getComputedStyle(chartControlsWrapper),
-        wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
-
-        console.log(wrapperPageMargin);
-        console.log(filtersPanel.offsetWidth);
-        console.log(newWidth);
-
-
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isXL){
+      wrapperStyles = window.getComputedStyle(chartControlsWrapper);
+      wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
       newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPageMargin);
     }
 
