@@ -143,7 +143,8 @@ const ComparablesChart = (() => {
   //////////////////////////////
   // PRIVATE
   function setData(data){
-    _depreciationData = data.publishedValues.map((d) => {
+    let curveData = data.depreciationCurveData;
+    _depreciationData = curveData.publishedValues.map((d) => {
       return {
         publishedProductValueId: Number(d.publishedProductValueId),
         issueId: Number(d.issueId),
@@ -161,16 +162,16 @@ const ComparablesChart = (() => {
     _forecastData = {
       publishedProductValueId: 0,
       issueId: 0,
-      issueName: data.threeMonthForecast.issueName,
+      issueName: curveData.threeMonthForecast.issueName,
       publishedDate: d3.timeMonth.offset(_depreciationData[_depreciationData.length-1].publishedDate,3),
-      wholesale: Number(data.threeMonthForecast.wholesale),
-      resaleCash: Number(data.threeMonthForecast.resaleCash),
-      advertised: Number(data.threeMonthForecast.advertised),
+      wholesale: Number(curveData.threeMonthForecast.wholesale),
+      resaleCash: Number(curveData.threeMonthForecast.resaleCash),
+      advertised: Number(curveData.threeMonthForecast.advertised),
     };
 
     _depreciationData.push(_forecastData);
 
-    _baseData = data.productSpecs;
+    _baseData = curveData.productSpecs;
   };
 
   function setScales(){
@@ -484,7 +485,6 @@ const ComparablesChart = (() => {
 
   function resizeChart() {
     if(!_chartInitialized) return false;
-
     let newWidth = wrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
@@ -496,9 +496,11 @@ const ComparablesChart = (() => {
     }
 
     if(Math.abs(newWidth - width) > 5){
+      width = d3.max([newWidth, 0]);
+      height = d3.max([newHeight, 0]);
+
+      if(width === 0 || height === 0) return;
       console.log('CHART: resize chart!');
-      width = newWidth;
-      height = newHeight;
 
       // update the SVG
       $svg.attr('width', width + (margin.left+margin.right))

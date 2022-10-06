@@ -7,6 +7,9 @@ import FullScreenButton from './FullScreenButton';
 class ChartControlsWrapper extends React.Component {
   constructor(){
     super();
+    this.state = {
+      tabSwitched: false,
+    };
   };
 
   componentDidMount() {
