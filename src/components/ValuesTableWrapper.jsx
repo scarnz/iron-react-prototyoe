@@ -17,7 +17,7 @@ export default function ValuesTableWrapper() {
 
 
 		    <dl className="flex flex-col border sm:border-0 rounded sm:rounded-none shadow sm:shadow-none">
-		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 px-6 bg-blue-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
+		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 pl-6 bg-blue-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
 			     <span className="block w-full text-right">My Sold</span> 
 			      <span className="bg-white text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700 hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium">3</span>
 		      </dt>
@@ -40,7 +40,7 @@ export default function ValuesTableWrapper() {
 
 
 		    <dl className="flex flex-col border sm:border-0 rounded sm:rounded-none shadow sm:shadow-none">
-		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 px-6 bg-sky-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
+		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 pl-6 bg-sky-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
 			     <span className="block w-full text-right">Auction</span> 
 {/*			      <span className="bg-white text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700 hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium">1</span>
 */}		      </dt>
@@ -62,7 +62,7 @@ export default function ValuesTableWrapper() {
 
 
 		    <dl className="flex flex-col border sm:border-0 rounded sm:rounded-none shadow sm:shadow-none">
-		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 px-6 bg-red-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
+		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 pl-6 bg-red-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap">
 		      	<span className="block w-full text-right">Sold</span>
 {/*			      <span className="bg-white text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700 hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium">1</span>
 */}		      </dt>
@@ -84,7 +84,7 @@ export default function ValuesTableWrapper() {
 
 
 		    <dl className="flex flex-col border sm:border-0 rounded sm:rounded-none shadow sm:shadow-none">
-		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 px-6 bg-amber-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap overflow-x-hidden">
+		      <dt className="grid grid-cols-2 justify-items-start text-right py-2 pl-6 bg-amber-100 text-sm font-bold border-b border-gray-400 text-gray-800 whitespace-nowrap overflow-x-hidden">
 			     <span className="block w-full text-right">Advertised</span> 
 			      <span className="bg-white text-gray-600 group-hover:bg-gray-300 group-hover:text-gray-700 hidden md:flex justify-center items-center ml-3 px-3 rounded-full text-xs font-medium">3</span>
 		      </dt>
