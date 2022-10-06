@@ -10,9 +10,6 @@ import Header from "./components/Header";
 
 import ChartValuesTabs from "./components/ChartValuesTabs";
 
-import ComparablesMatchMsg from './components/ComparablesMatchMsg';
-
-
 import ComparablesCardTabs from "./components/ComparablesCardTabs";
 
 import Footer from "./components/Footer";
@@ -38,7 +35,6 @@ export default function App() {
         <section id="comparablesContent" className="flex-1 px-0 sm:px-4 2xl:px-6">
           <Header />
           <ChartValuesTabs />
-          <ComparablesMatchMsg />
           <ComparablesCardTabs />
         </section>
 

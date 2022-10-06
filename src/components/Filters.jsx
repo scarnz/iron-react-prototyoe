@@ -1,9 +1,11 @@
+import FilterAdditonalModels from './FilterAdditonalModels';
+
 export default function Filters() {
   return (
     <>
 
       {/* Filters Panel */}
-      <aside id="filtersPanel" className="relative xl:w-84 xl:flex-shrink-0 flex flex-col bg-gray-100 border border-slate-200 border-b-slate-100 rounded-md xl:max-w-[221px] xl:pb-2 mb-6">
+      <aside id="filtersPanel" className="relative xl:w-84 xl:flex-shrink-0 hidden md:flex flex-col bg-gray-100 border border-slate-200 border-b-slate-100 rounded-md xl:max-w-[221px] xl:pb-2 mb-6">
           
         <div className="flex-col sm:flex sm:flex-row xl:flex-col justify-between sm:items-center xl:items-start px-3 pt-1 sm:pt-0 xl:pt-2">
           <label htmlFor="" className="flex-shrink-0 mb-2 md:mb-0 xl:mb-0 mr-3 text-sm text-gray-700 font-medium">
@@ -153,14 +155,7 @@ export default function Filters() {
               </select>
             </div>
 
-            <div className="single-filter-wrapper basis-full">
-              <label htmlFor="location" className="block text-xs font-medium text-gray-700">Lorem</label>
-              <select id="location" name="location" className="mt-1 block w-full rounded bg-gray-50 border-slate-200 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
-                <option>Select Lorem</option>
-                <option defaultValue>Lorem 1</option>
-                <option >Lorem 2</option>
-              </select>
-            </div>
+            <FilterAdditonalModels />
 
           </div>
         </div>

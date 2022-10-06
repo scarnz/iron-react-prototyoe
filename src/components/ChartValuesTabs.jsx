@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Tab } from '@headlessui/react';
-
 import ChartFiltersWrapper from "./ChartFiltersWrapper";
 import ValuesTableWrapper from "./ValuesTableWrapper";
 

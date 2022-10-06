@@ -4,6 +4,7 @@
 import { Fragment } from 'react';
 import { Tab } from '@headlessui/react';
 
+import ComparablesMatchMsg from './ComparablesMatchMsg';
 import ComparablesCardSelectSort from "./ComparablesCardSelectSort";
 import ComparablesCardMySold from './ComparablesCardMySold';
 import ComparablesCardSold from './ComparablesCardSold';
@@ -76,17 +77,21 @@ export default function ComparablesCardTabs() {
       <Tab.Panels className="tabs-panels">
 
         <Tab.Panel 
-	        as={'ul'}
-	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        className=""
 	        >
-	       
-	        {
-				    Array.from({length: 5})
-				        .map((_, index) => (
-			            <ComparablesCardMySold key={index} />
-				        )
-				    )
-					}
+    			<ComparablesMatchMsg />
+
+	        <ul className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24">
+
+		        {
+					    Array.from({length: 5})
+					        .map((_, index) => (
+				            <ComparablesCardMySold key={index} />
+					        )
+					    )
+						}
+					</ul>
+					
         </Tab.Panel>
 
         <Tab.Panel 
@@ -94,6 +99,7 @@ export default function ComparablesCardTabs() {
 	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
 	        >
 	       
+
 	        {
 				    Array.from({length: 8})
 				        .map((_, index) => (

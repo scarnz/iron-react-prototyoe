@@ -4,7 +4,7 @@ export default function BreakpointIndicator() {
       {/*Prototyping Breakpoint Indicator*/}
       <div className="w-8 h-8 bg-red-900 rounded-full">
         <div className="relative flex justify-center items-center text-gray-200 w-8 h-8">
-          <p className="text-xs font-medium sm:hidden">M</p> 
+          <p className="text-xs font-medium sm:hidden">Ph</p> 
           <p className="text-xs font-medium hidden sm:block md:hidden">SM</p>
           <p className="text-xs font-medium hidden md:block lg:hidden">MD</p>
           <p className="text-xs font-medium hidden lg:block xl:hidden">LG</p>
