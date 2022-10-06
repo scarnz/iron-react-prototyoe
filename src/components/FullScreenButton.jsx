@@ -10,7 +10,7 @@ const FullScreenButton = () => {
     <button 
 	    id="fullScreenToggle" 
 	    data-fullscreen="false" 
-	    className="position absolute top-[4px] right-[68px] w-9 h-9 md:h-9 ml-auto flex flex-shrink-0 flex-row justify-center items-center border border-slate-200 bg-gray-50 hover:bg-gray-100 rounded hadow"
+	    className="position absolute top-[4px] right-[68px] w-9 h-9 md:h-9 ml-auto flex flex-shrink-0 justify-center items-center border border-slate-200 bg-white outline:ring-blue-500 focus:ring-blue-500 hover:bg-gray-50 rounded"
 	    >
       
       <ArrowsPointingOutIcon className="h-5 w-5 text-gray-500"/>
