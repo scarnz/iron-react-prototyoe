@@ -4,7 +4,7 @@ import ChartControls from './ChartControls';
 import ChartInnerLegend from './ChartInnerLegend';
 import FullScreenButton from './FullScreenButton';
 
-class ChartWrapper extends React.Component {
+class ChartControlsWrapper extends React.Component {
   constructor(){
     super();
   };
@@ -23,7 +23,7 @@ class ChartWrapper extends React.Component {
     return (
       <>
         {/* Chart + Control Panel Wrapper   */}
-        <div id="chartControlsWrapper" className="relative w-full flex flex-col xl:ml-3 py-0 px-2 sm:px-0 md:px-0">
+        <div id="chartControlsWrapper" className="relative w-full flex flex-col xl:ml-3 py-0 xxxpx-2 sm:px-0 md:px-0">
 
 
           <ChartControls />
@@ -86,4 +86,4 @@ function updateChart(data){
   ComparablesChart.update(data);
 }
 
-export default ChartWrapper;
+export default ChartControlsWrapper;
