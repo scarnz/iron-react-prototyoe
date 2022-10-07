@@ -73,7 +73,7 @@ const ComparablesChart = (() => {
 
   ////////////////////////////////
   // PUBLIC
-  const init = (element, data) => {
+  const init = (element, data, animate=true) => {
     if(element === null){
       console.log('CHART: ELEMENT CANNOT BE NULL');
       return false;
@@ -114,7 +114,7 @@ const ComparablesChart = (() => {
     drawGrid();
     drawYAxis();
     drawXAxis();
-    drawLines();
+    drawLines(animate);
 
     // listeners
     wrapper.addEventListener('chartResize', (e) => {
@@ -383,8 +383,8 @@ const ComparablesChart = (() => {
       .curve(d3.curveBasis);
   };
 
-  function drawLines() {
-    console.log('CHART: draw lines');
+  function drawLines(animate) {
+    console.log('CHART: draw lines. Animate:', animate);
     let lineStrokeTransition = d3.transition()
         .ease(d3.easeSin)
         .duration(animationDuration);
@@ -424,34 +424,44 @@ const ComparablesChart = (() => {
         line1NewDashes = new Array(line1DashCount).join( lineDashing + ' ' ),
         line1DashArray = `${line1NewDashes} 0, ${line1Length}`;
 
-    $line1.attr('stroke-dashoffset', line1Length)
-        .attr('stroke-dasharray', line1DashArray)
-        .transition(lineStrokeTransition)
-          .attr('stroke-dashoffset', 0);
-
     let line2Length = $line2.node().getTotalLength();
-    $line2
-      .attr('stroke-dashoffset', line2Length)
-      .attr('stroke-dasharray', line2Length)
-        .transition(lineStrokeTransition)
-          .attr('stroke-dashoffset', 0);
-
 
     let line3Length = $line3.node().getTotalLength(),
         line3DashCount = Math.ceil( line3Length / lineDashLength ),
         line3NewDashes = new Array(line3DashCount).join( lineDashing + ' ' ),
         line3DashArray = `${line3NewDashes} 0, ${line3Length}`;
-    $line3.attr('stroke-dashoffset', line3Length)
-        .attr('stroke-dasharray', line3DashArray)
+
+    if(animate){
+      $line1.attr('stroke-dashoffset', line1Length)
+        .attr('stroke-dasharray', line1DashArray)
         .transition(lineStrokeTransition)
           .attr('stroke-dashoffset', 0);
 
-    // post animation reset dash array
-    setTimeout(() => {
-      $line1.attr('stroke-dasharray', lineDashing);
-      $line2.attr('stroke-dasharray', 0);
-      $line3.attr('stroke-dasharray', lineDashing);
-    }, animationDuration);
+      $line2
+        .attr('stroke-dashoffset', line2Length)
+        .attr('stroke-dasharray', line2Length)
+          .transition(lineStrokeTransition)
+            .attr('stroke-dashoffset', 0);
+
+      $line3.attr('stroke-dashoffset', line3Length)
+          .attr('stroke-dasharray', line3DashArray)
+          .transition(lineStrokeTransition)
+            .attr('stroke-dashoffset', 0);
+
+      // post animation reset dash array
+      setTimeout(() => {
+        $line1.attr('stroke-dasharray', lineDashing);
+        $line2.attr('stroke-dasharray', 0);
+        $line3.attr('stroke-dasharray', lineDashing);
+      }, animationDuration);
+    } else {
+      $line1.attr('stroke-dasharray', line1DashArray)
+        .attr('stroke-dashoffset', 0);
+
+      $line3.attr('stroke-dasharray', line3DashArray)
+        .attr('stroke-dashoffset', 0);
+    }
+
 
 
     ////////// example event

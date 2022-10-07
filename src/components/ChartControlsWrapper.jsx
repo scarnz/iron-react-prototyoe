@@ -1,24 +1,20 @@
-import React from 'react'; // get the React object from the react module
+import React from 'react';
 import {useEffect, useState} from 'react';
 import ChartControls from './ChartControls';
 import ChartInnerLegend from './ChartInnerLegend';
 import FullScreenButton from './FullScreenButton';
-
 class ChartControlsWrapper extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      tabSwitched: false,
-    };
+  constructor(props){
+    super(props);
   };
 
   componentDidMount() {
-    console.log('mount')
-    drawChart();
+    console.log('mount');
+    drawChart(this.props.animate);
   };
 
   componentDidUpdate(){
-    console.log('update')
+    console.log('update');
     updateChart(window.depreciationData2);
   };
 
@@ -47,7 +43,7 @@ class ChartControlsWrapper extends React.Component {
   }
 };
 
-function drawChart(){
+function drawChart(animate){
 
   let data = [window.depreciationData,window.depreciationData2];
 
@@ -55,7 +51,7 @@ function drawChart(){
   let element = document.getElementById('comparablesChart');
   // // Initialize the chart. This is how the chart will be
   // // rendered on the page/element with it's initial data set.
-  ComparablesChart.init(element, data[0]);
+  ComparablesChart.init(element, data[0], animate);
 
   // This is how we'll transmit data from click events within
   // the chart, back to the react component. Each event will

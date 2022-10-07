@@ -6,22 +6,36 @@ import ValuesTableWrapper from "./ValuesTableWrapper";
 
 const allTheTabsInfo = [
   { name: 'Chart' },
-  { name: 'Values Table', count: '6' }
-]
+  { name: 'Values Table', count: '6' },
+];
 
 function classNameCruncher(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 class ChartValuesTabs extends React.Component {
-// export default function ChartValuesTabs() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animate: true,
+    };
+    this.setAnimate = this.setAnimate.bind(this);
+  }
+
+  setAnimate(shouldAnimate) {
+    this.setState({
+      animate: shouldAnimate,
+    });
+  }
+
   render(){
     return (
       <Tab.Group
         manual={true}
         defaultIndex={0}
         onChange={(index) => {
-          console.log('Changed selected tab to:', index)
+          console.log('Changed selected tab to:', index);
+          this.setAnimate(false)
         }}
       >
         <aside id="comparablesChartValuesTabs" className="flex w-full border-b-[3px] border-blue-900">
@@ -66,7 +80,7 @@ class ChartValuesTabs extends React.Component {
         <Tab.Panels>
 
           <Tab.Panel>
-            <ChartFiltersWrapper />
+            <ChartFiltersWrapper animate={this.state.animate}/>
           </Tab.Panel>
 
           <Tab.Panel>
