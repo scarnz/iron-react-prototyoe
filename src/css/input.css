@@ -36,3 +36,34 @@
 #chartUpdateLink:hover {
   opacity:  0.8;
 }
+
+
+#chartFiltersWrapper.full-screen {
+  background: white;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-top: 0;
+}
+
+#chartFiltersWrapper.full-screen #filtersPanel {
+  display: none;
+}
+
+#chartFiltersWrapper.full-screen #chartControlsWrapper {
+  padding-top: 12px;
+  /*margin: 0 1rem 0 1rem;*/
+}
+
+#chartFiltersWrapper.full-screen #heightWrapper {
+  height:  100%;
+  margin-bottom: 0.625rem;
+}
+
+#chartFiltersWrapper.full-screen #fullScreenToggle {
+  top: -3.1rem;
+  right: 0.8rem;
+}
