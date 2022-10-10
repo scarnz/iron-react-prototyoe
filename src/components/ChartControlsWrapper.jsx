@@ -3,27 +3,49 @@ import {useEffect, useState} from 'react';
 import ChartControls from './ChartControls';
 import ChartInnerLegend from './ChartInnerLegend';
 import FullScreenButton from './FullScreenButton';
+
+function classNameCruncher(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
 class ChartControlsWrapper extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      fullScreen: false,
+    };
   };
 
   componentDidMount() {
-    console.log('mount');
+    console.log('mount', this.state)
     drawChart(this.props.animate);
   };
 
   componentDidUpdate(){
-    console.log('update');
-    updateChart(window.depreciationData2);
+    console.log('update', this.state);
+    console.log('fullScreen:', this.state.fullScreen)
+    // updateChart(window.depreciationData2);
+  };
+
+  toggleFullscreen = () => {
+    this.setState({
+      fullScreen: !this.state.fullScreen
+    });
   };
 
   render() {
     return (
       <>
         {/* Chart + Control Panel Wrapper   */}
-        <div id="chartControlsWrapper" className="relative w-full flex flex-col xl:ml-3 py-0 xxxpx-2 sm:px-0 md:px-0">
-
+        <div
+            id="chartControlsWrapper"
+            className={classNameCruncher(
+                        this.state.fullScreen
+                          ? 'full-screen'
+                          : ['relative w-full flex flex-col xl:ml-3 py-0 xxxpx-2 sm:px-0 md:px-0',
+                            '']
+                      )}
+        >
 
           <ChartControls />
 
@@ -31,7 +53,7 @@ class ChartControlsWrapper extends React.Component {
           <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6">
             
             <ChartInnerLegend />
-            <FullScreenButton />
+            <FullScreenButton toggleFullscreen={this.toggleFullscreen}/>
          
             {/* Chart Itself */}
             <div id="comparablesChart" className="w-full"></div>
