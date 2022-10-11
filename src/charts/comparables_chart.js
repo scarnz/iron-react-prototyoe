@@ -28,14 +28,12 @@ const ComparablesChart = (() => {
 
   // define/scope some dimension vars
   let el,
-      wrapper,
+      filtersWrapper,
       filtersPanel,
+      controlsWrapper,
+      wrapperStyles,
       width,
       height,
-      chartControlsWrapper,
-      wrapperStyles,
-      wrapperPageMargin,
-      wrapperPadding,
       isXL,
       isFullScreen,
       margin = {top: 1, right: 65, bottom: 40, left: 1},
@@ -88,18 +86,21 @@ const ComparablesChart = (() => {
     setData(data);
 
     el = element;
-    wrapper = document.getElementById('chartFiltersWrapper');
+    filtersWrapper = document.getElementById('chartFiltersWrapper');
     filtersPanel = document.getElementById('filtersPanel');
-    chartControlsWrapper = document.getElementById('chartControlsWrapper');
+    controlsWrapper = document.getElementById('chartControlsWrapper');
 
-    width = wrapper.offsetWidth - margin.left - margin.right;
+    width = filtersWrapper.offsetWidth - margin.left - margin.right;
     height = el.offsetHeight - margin.top - margin.bottom;
 
+    isFullScreen = filtersWrapper.classList.contains('full-screen');
     isXL = (document.body.clientWidth >= breakpoints.xl);
-    if(isXL){
+    if(isFullScreen){
+      wrapperStyles = window.getComputedStyle(wrapper);
+      width = (width - filtersPanel.offsetWidth - (parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight)));
+    } else if(isXL){
       wrapperStyles = window.getComputedStyle(chartControlsWrapper);
-      wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
-      width = (width - filtersPanel.offsetWidth - wrapperPageMargin);
+      width = (width - filtersPanel.offsetWidth - parseInt(wrapperStyles.marginLeft));
     }
 
     setScales();
@@ -119,12 +120,12 @@ const ComparablesChart = (() => {
     drawLines(animate);
 
     // listeners
-    wrapper.addEventListener('chartResize', (e) => {
+    filtersWrapper.addEventListener('chartResize', (e) => {
       if(!_chartInitialized) return false;
       resizeChart();
     }, false);
 
-    chartResizer.observe(wrapper);
+    chartResizer.observe(filtersWrapper);
   };
 
   const update = (data) => {
@@ -498,26 +499,18 @@ const ComparablesChart = (() => {
   function resizeChart() {
     if(!_chartInitialized) return false;
 
-    let newWidth = wrapper.offsetWidth - margin.left - margin.right,
+    let newWidth = filtersWrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
-    // isFullScreen = if #chartFiltersWrapper has class 'full-screen'
-
-    if(isFullScreen){
-      // For all size screens:
-      wrapperStyles = window.getComputedStyle(chartFiltersWrapper);
-      wrapperPadding = parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight);
-      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPadding);
-    }
-
-    // if(!isFullScreen){ do all the resizing normally here}
-
-
+    isFullScreen = filtersWrapper.classList.contains('full-screen');
     isXL = (document.body.clientWidth >= breakpoints.xl);
-    if(isXL){
+    if(isFullScreen){
+      wrapperStyles = window.getComputedStyle(filtersWrapper);
+      console.log(wrapperStyles)
+      newWidth = (newWidth - filtersPanel.offsetWidth - (parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight)));
+    } else if(isXL){
       wrapperStyles = window.getComputedStyle(chartControlsWrapper);
-      wrapperPageMargin = parseInt(wrapperStyles.marginLeft);
-      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPageMargin);
+      newWidth = (newWidth - filtersPanel.offsetWidth - parseInt(wrapperStyles.marginLeft));
     }
 
     if(Math.abs(newWidth - width) > 5){
