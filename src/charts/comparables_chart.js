@@ -35,7 +35,9 @@ const ComparablesChart = (() => {
       chartControlsWrapper,
       wrapperStyles,
       wrapperPageMargin,
+      wrapperPadding,
       isXL,
+      isFullScreen,
       margin = {top: 1, right: 65, bottom: 40, left: 1},
       breakpoints = {xl: 1280},
       bandWidth,
@@ -495,8 +497,21 @@ const ComparablesChart = (() => {
 
   function resizeChart() {
     if(!_chartInitialized) return false;
+
     let newWidth = wrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
+
+    // isFullScreen = if #chartFiltersWrapper has class 'full-screen'
+
+    if(isFullScreen){
+      // For all size screens:
+      wrapperStyles = window.getComputedStyle(chartFiltersWrapper);
+      wrapperPadding = parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight);
+      newWidth = (newWidth - filtersPanel.offsetWidth - wrapperPadding);
+    }
+
+    // if(!isFullScreen){ do all the resizing normally here}
+
 
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isXL){
