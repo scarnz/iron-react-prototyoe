@@ -2,7 +2,6 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import ChartControls from './ChartControls';
 import ChartInnerLegend from './ChartInnerLegend';
-import FullScreenButton from './FullScreenButton';
 
 function classNameCruncher(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -11,9 +10,6 @@ function classNameCruncher(...classes) {
 class ChartControlsWrapper extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      fullScreen: false,
-    };
   };
 
   componentDidMount() {
@@ -23,14 +19,7 @@ class ChartControlsWrapper extends React.Component {
 
   componentDidUpdate(){
     console.log('update', this.state);
-    console.log('fullScreen:', this.state.fullScreen)
     // updateChart(window.depreciationData2);
-  };
-
-  toggleFullscreen = () => {
-    this.setState({
-      fullScreen: !this.state.fullScreen
-    });
   };
 
   render() {
@@ -39,22 +28,18 @@ class ChartControlsWrapper extends React.Component {
         {/* Chart + Control Panel Wrapper   */}
         <div
             id="chartControlsWrapper"
-            className={classNameCruncher(
-                        this.state.fullScreen
-                          ? 'full-screen fixed left-0 top-0 pt-3 px-2 z-[1000]'
-                          : 'relative xl:ml-3',
-                        'bg-white w-full h-full flex flex-col'
-                        // The final line of classNames are included for both states. Note for that to work, there can't be any square braces [] around the strings. *Shrugs*
-                      )}
+            className='relative xl:ml-3 bg-white w-full h-full flex flex-col'
         >
 
-          <ChartControls />
+          <ChartControls
+            fullScreen={this.props.fullScreen}
+            toggleFullscreen={this.props.toggleFullscreen}
+          />
 
           {/* Chart Height Wrapper */}
           <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6">
             
             <ChartInnerLegend />
-            <FullScreenButton toggleFullscreen={this.toggleFullscreen}/>
          
             {/* Chart Itself */}
             <div id="comparablesChart" className="w-full"></div>

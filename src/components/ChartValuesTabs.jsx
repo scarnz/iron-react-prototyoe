@@ -18,15 +18,26 @@ class ChartValuesTabs extends React.Component {
     super(props);
     this.state = {
       animate: true,
+      fullScreen: false,
     };
     this.setAnimate = this.setAnimate.bind(this);
   }
 
-  setAnimate(shouldAnimate) {
+  componentDidUpdate(){
+    console.log('fullScreen:', this.state.fullScreen)
+  };
+
+  setAnimate = (shouldAnimate) => {
     this.setState({
       animate: shouldAnimate,
     });
   }
+
+  toggleFullscreen = () => {
+    this.setState({
+      fullScreen: !this.state.fullScreen
+    });
+  };
 
   render(){
     return (
@@ -80,7 +91,13 @@ class ChartValuesTabs extends React.Component {
         <Tab.Panels>
 
           <Tab.Panel>
-            <ChartFiltersWrapper animate={this.state.animate}/>
+            <ChartFiltersWrapper
+              classNameCruncher={classNameCruncher}
+              animate={this.state.animate}
+              fullScreen={this.state.fullScreen}
+              toggleFullscreen={this.toggleFullscreen}
+            />
+
           </Tab.Panel>
 
           <Tab.Panel>

@@ -4,33 +4,31 @@ import Filters from './Filters';
 
 
 class ChartFiltersWrapper extends React.Component {
-
+  constructor(props){
+    super(props);
+  };
 
   render(){
     return (
-      <>
-        <div 
-          id="chartFiltersWrapper" 
-          className="elative bg-white flex flex-col xl:flex-row xl:flex-row-reverse xl:justify-end mx-2 sm:mx-0 mt-[13px]"
+      <div
+        id="chartFiltersWrapper"
+        className={
+          this.props.classNameCruncher(this.props.fullScreen ?
+            'full-screen'
+            : '',
+            'relative bg-white flex flex-col xl:flex-row xl:flex-row-reverse xl:justify-end mx-2 sm:mx-0 mt-[13px]'
+          )
+        }
+      >
 
-          // Use these classNames:
-          // className={classNameCruncher(
-          //             this.state.fullScreen
-          //               ? 'full-screen'
-          //               : '',
-          //                 'relative bg-white flex flex-col xl:flex-row xl:flex-row-reverse xl:justify-end mx-2 sm:mx-0 mt-[13px]'
-          //           )}
+        <ChartControlsWrapper
+          animate={this.props.animate}
+          fullScreen={this.props.fullScreen}
+          toggleFullscreen={this.props.toggleFullscreen}
+        />
 
-
-        >
-
-          <ChartControlsWrapper animate={this.props.animate}/>
-          <Filters />
-
-        </div>
-        {/* End Chart Filters Wrapper */}
-
-      </>
+        <Filters />
+      </div>
     );
   }
 };

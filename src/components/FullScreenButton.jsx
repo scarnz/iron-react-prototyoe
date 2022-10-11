@@ -7,22 +7,26 @@ import React from 'react';
 class FullScreenButton extends React.Component {
   constructor(props){
     super(props);
-  }
+  };
 
   render(){
+    let icon;
+    if(this.props.fullScreen){
+      icon = <ArrowsPointingInIcon className="h-5 w-5 text-gray-500"/>;
+    } else {
+      icon = <ArrowsPointingOutIcon className="h-4 w-4 text-gray-500"/>;
+    }
 
     return (
       <button
         id="fullScreenToggle"
         data-fullscreen="false"
-        className="position absolute top-[4px] right-[68px] w-9 h-9 md:h-9 ml-auto flex flex-shrink-0 justify-center items-center border border-slate-200 bg-white outline:ring-blue-500 focus:ring-blue-500 hover:bg-gray-50 rounded"
-          onClick={this.props.toggleFullscreen}
-        >
+        className="absolute flex-0 sm:static -top-12 right-0 w-10 h-10 ml-auto flex flex-shrink-0 justify-center items-center border xxxborder-slate-200 border-gray-300 bg-white outline:ring-blue-500 focus:ring-blue-500 hover:bg-gray-50 rounded-full"
+        onClick={this.props.toggleFullscreen}
+      >
 
-          <ArrowsPointingOutIcon className="h-5 w-5 text-gray-500"/>
+        {icon}
 
-          {/*When active, use:
-          <ArrowsPointingInIcon className="h-5 w-5 text-gray-500"/>*/}
 
       </button>
     );

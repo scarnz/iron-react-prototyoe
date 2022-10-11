@@ -1,9 +1,12 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import FullScreenButtonTwo from './FullScreenButtonTwo';
+import FullScreenButton from './FullScreenButton';
 
 
 class ChartControls extends React.Component {
+  constructor(props){
+    super(props);
+  };
 
 	render() {
 
@@ -60,7 +63,10 @@ class ChartControls extends React.Component {
           </div>
         </div>
 
-        <FullScreenButtonTwo/>
+        <FullScreenButton
+          fullScreen={this.props.fullScreen}
+          toggleFullscreen={this.props.toggleFullscreen}
+        />
 
       </aside>
     );
