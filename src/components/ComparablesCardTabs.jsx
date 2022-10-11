@@ -10,6 +10,7 @@ import ComparablesCardMySold from './ComparablesCardMySold';
 import ComparablesCardSold from './ComparablesCardSold';
 import ComparablesCardAuction from './ComparablesCardAuction';
 import ComparablesCardAdvertised from './ComparablesCardAdvertised';
+import ComparablesCardList from './ComparablesCardList';
 
 
 const allTheTabsInfo = [
@@ -28,7 +29,7 @@ export default function ComparablesCardTabs() {
   return (
     <Tab.Group
       manual={true}
-      defaultIndex={0}
+      defaultIndex={4}
       onChange={(index) => {
         console.log('Changed selected tab to:', index)
       }}
@@ -138,14 +139,11 @@ export default function ComparablesCardTabs() {
         </Tab.Panel>
 
         <Tab.Panel 
-	        as={'ul'}
-	        className="grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-3 sm:px-0 mb-24"
+	        className="px-3 sm:px-0 mb-24 list-none"
 	        >
-					<ComparablesCardSold />
-					<ComparablesCardAuction />
-					<ComparablesCardMySold />
-					<ComparablesCardAdvertised />
 
+{/*					<ComparablesCardList />
+*/}
         </Tab.Panel>
 
 

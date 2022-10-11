@@ -10,7 +10,7 @@ class FullScreenButtonTwo extends React.Component {
 
     return (
       <button
-        id="fullScreenToggle"
+        id="fullScreenToggleTwo"
         data-fullscreen="false"
         className="absolute flex-0 sm:static -top-12 right-0 w-10 h-10 ml-auto flex flex-shrink-0 justify-center items-center border xxxborder-slate-200 border-gray-300 bg-white outline:ring-blue-500 focus:ring-blue-500 hover:bg-gray-50 rounded-full"
         >
