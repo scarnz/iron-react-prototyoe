@@ -2,6 +2,11 @@
 
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+const plugin = require('tailwindcss/plugin')
+
+
+
+
 module.exports = {
   content: [
     "./src/**/*.{html,jsx}", 
@@ -75,5 +80,10 @@ module.exports = {
   plugins: [
     // ...
     require('@tailwindcss/forms'),
+
+    plugin(function({ addVariant }) {
+      addVariant('full-screen', '&.full-screen')
+    })
   ],
+
 };

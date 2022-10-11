@@ -38,6 +38,50 @@
 }
 
 
+/*Fullscreen Setup One:*/
+#chartControlsWrapper.full-screen {
+  /*background: light-blue;*/
+/*  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-top: 0;
+  padding-top: 12px;*/
+  /*margin: 0 1rem 0 1rem;*/
+}
+
+#chartControlsWrapper.full-screen #heightWrapper {
+  height:  100%;
+  margin-bottom: 0.625rem;
+}
+
+
+/*#chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
+  top: 0;
+  right: 0;
+  background: red;
+}
+
+
+@media (min-width: 640px) {  
+  #chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
+    top: -4.1rem;
+    right: 0.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
+    top: -3.1rem;
+    right: 0.8rem;
+  }
+}
+*/
+
+
+/*FullScreen Setup Two*/
 #chartFiltersWrapper.full-screen {
   background: white;
   height: 100%;
@@ -55,7 +99,6 @@
 
 #chartFiltersWrapper.full-screen #chartControlsWrapper {
   padding-top: 12px;
-  /*margin: 0 1rem 0 1rem;*/
 }
 
 #chartFiltersWrapper.full-screen #heightWrapper {

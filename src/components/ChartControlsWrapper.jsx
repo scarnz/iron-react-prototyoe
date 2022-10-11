@@ -41,9 +41,10 @@ class ChartControlsWrapper extends React.Component {
             id="chartControlsWrapper"
             className={classNameCruncher(
                         this.state.fullScreen
-                          ? 'full-screen'
-                          : ['relative w-full flex flex-col xl:ml-3 py-0 xxxpx-2 sm:px-0 md:px-0',
-                            '']
+                          ? 'full-screen fixed left-0 top-0 pt-3 px-2 z-[1000]'
+                          : 'relative xl:ml-3',
+                        'bg-white w-full h-full flex flex-col'
+                        // The final line of classNames are included for both states. Note for that to work, there can't be any square braces [] around the strings. *Shrugs*
                       )}
         >
 
