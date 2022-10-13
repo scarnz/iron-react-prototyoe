@@ -38,51 +38,10 @@
 }
 
 
-/*Fullscreen Setup One:*/
-#chartControlsWrapper.full-screen {
-  /*background: light-blue;*/
-/*  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  margin-top: 0;
-  padding-top: 12px;*/
-  /*margin: 0 1rem 0 1rem;*/
-}
 
-#chartControlsWrapper.full-screen #heightWrapper {
-  height:  100%;
-  margin-bottom: 0.625rem;
-}
-
-
-/*#chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
-  top: 0;
-  right: 0;
-  background: red;
-}
-
-
-@media (min-width: 640px) {  
-  #chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
-    top: -4.1rem;
-    right: 0.8rem;
-  }
-}
-
-@media (min-width: 768px) {
-  #chartControlsWrapper.full-screen #heightWrapper > #fullScreenToggle {
-    top: -3.1rem;
-    right: 0.8rem;
-  }
-}
-*/
-
-
+/*Fullscreen Styles*/
 #chartFiltersWrapper {
-  transition: width 1s ease-in-out;
+  /*transition: width 1s ease-in-out;*/
 }
 
 /*FullScreen Setup Two*/
@@ -94,41 +53,100 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  margin-top: 0;
+  /*margin-top: 0;*/
   margin-left: 0;
   margin-right: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.25rem;
 }
+
+/*@media (min-width: 640px) {  
+  #chartFiltersWrapper.full-screen {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}*/
 
 #chartFiltersWrapper.full-screen #filtersPanel {
   display: none;
 }
 
 #chartFiltersWrapper.full-screen #chartControlsWrapper {
-  padding-top: 12px;
   margin-left: 0;
   margin-right: 0;
 }
 
-#chartFiltersWrapper.full-screen #heightWrapper {
-  height:  100%;
-  margin-bottom: 0.625rem;
+#chartFiltersWrapper.full-screen #chartControls {
+  z-index: 10000;
 }
 
-#chartFiltersWrapper.full-screen #fullScreenToggle {
-  top: -3.1rem;
-  right: 0;
+#chartFiltersWrapper.full-screen #fullScreenButton {
+  grid-column:  7;
+  grid-row: 1;
 }
 
-@media (min-width: 640px) {  
-  #chartFiltersWrapper.full-screen #fullScreenToggle {
-    margin-right: 0.5rem;
-  }
+@media (max-aspect-ratio: 1/1) or (max-height: 897px){
 
   #chartFiltersWrapper.full-screen {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    /*background: red;*/
+    padding-top: 0;
+    padding-right: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0;
+    margin-left: -1px;
+    border-right: 1px solid white;
+    width: calc(100% + 1px);
   }
 
+  #chartFiltersWrapper.full-screen #chartControls {
+    /*background: yellow;*/
+    margin-top: 0.25rem;
+    margin-bottom:  0.25rem;
+    padding-left: 0.25rem;
+    row-gap: 0.3rem;
+    column-gap: 0.5rem;
+  }
+
+  #chartFiltersWrapper.full-screen  #chartControlLabel {
+    padding-left: 0.65rem;
+  }
+
+  #chartFiltersWrapper.full-screen #fullScreenButton {
+    right: 0.25rem;
+  }
 }
+
+@media (min-width: 897px) {  
+  #chartFiltersWrapper.full-screen {
+    /*background: lightblue;*/
+    padding-right: 0.5rem;
+    padding-bottom: 0.4rem;
+    padding-left: 0.5rem;
+  }
+
+  #chartFiltersWrapper.full-screen #chartControls {
+    /*background: lightblue;*/
+    margin-top: 0.6rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  #chartFiltersWrapper.full-screen  #chartControlLabel {
+    padding-left: 0.4rem;
+  }
+
+
+  #chartFiltersWrapper.full-screen #fullScreenButton {
+
+  }
+}
+
+#chartFiltersWrapper.full-screen #heightWrapper {
+  height:  100%;
+  margin-bottom: 0;
+}
+
+
+

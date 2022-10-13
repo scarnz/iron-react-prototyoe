@@ -28,15 +28,16 @@ const ComparablesChart = (() => {
 
   // define/scope some dimension vars
   let el,
-      filtersWrapper,
+      chartFiltersWrapper,
       filtersPanel,
+      chartControls,
       controlsWrapper,
       wrapperStyles,
       width,
       height,
       isXL,
       isFullScreen,
-      margin = {top: 1, right: 65, bottom: 40, left: 1},
+      margin = {top: 1, right: 51, bottom: 40, left: 1},
       breakpoints = {xl: 1280},
       bandWidth,
       animationDuration = 250,
@@ -86,14 +87,14 @@ const ComparablesChart = (() => {
     setData(data);
 
     el = element;
-    filtersWrapper = document.getElementById('chartFiltersWrapper');
+    chartFiltersWrapper = document.getElementById('chartFiltersWrapper');
     filtersPanel = document.getElementById('filtersPanel');
     controlsWrapper = document.getElementById('chartControlsWrapper');
 
-    width = filtersWrapper.offsetWidth - margin.left - margin.right;
+    width = chartFiltersWrapper.offsetWidth - margin.left - margin.right;
     height = el.offsetHeight - margin.top - margin.bottom;
 
-    isFullScreen = filtersWrapper.classList.contains('full-screen');
+    isFullScreen = chartFiltersWrapper.classList.contains('full-screen');
     isXL = (document.body.clientWidth >= breakpoints.xl);
     if(isFullScreen){
       wrapperStyles = window.getComputedStyle(wrapper);
@@ -120,12 +121,12 @@ const ComparablesChart = (() => {
     drawLines(animate);
 
     // listeners
-    filtersWrapper.addEventListener('chartResize', (e) => {
+    chartFiltersWrapper.addEventListener('chartResize', (e) => {
       if(!_chartInitialized) return false;
       resizeChart();
     }, false);
 
-    chartResizer.observe(filtersWrapper);
+    chartResizer.observe(chartFiltersWrapper);
   };
 
   const update = (data) => {
@@ -499,21 +500,43 @@ const ComparablesChart = (() => {
   function resizeChart() {
     if(!_chartInitialized) return false;
 
-    let newWidth = filtersWrapper.offsetWidth - margin.left - margin.right,
+    let newWidth = chartFiltersWrapper.offsetWidth - margin.left - margin.right,
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
-    isFullScreen = filtersWrapper.classList.contains('full-screen');
+    isFullScreen = chartFiltersWrapper.classList.contains('full-screen');
+
     isXL = (document.body.clientWidth >= breakpoints.xl);
+    
     if(isFullScreen){
-      wrapperStyles = window.getComputedStyle(filtersWrapper);
-      console.log(wrapperStyles)
+      wrapperStyles = window.getComputedStyle(chartFiltersWrapper);
+      // console.log(wrapperStyles);
       newWidth = (newWidth - filtersPanel.offsetWidth - (parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight)));
+
+      chartControls = document.getElementById('chartControls');
+      chartControlsStyles = window.getComputedStyle(chartControls);
+      console.log('Controls Top Margin is ' + parseInt(chartControlsStyles.marginTop));
+      chartControlsTotalHeight = (chartControls.offsetHeight + parseInt(chartControlsStyles.marginTop) + parseInt(chartControlsStyles.marginBottom));
+  
+      newHeight = (window.innerHeight - parseInt(wrapperStyles.paddingTop) - parseInt(wrapperStyles.paddingBottom) - chartControlsTotalHeight - margin.top - margin.bottom);
+
+      console.log('Bottom Padding is ' + parseInt(wrapperStyles.paddingBottom));
+      // console.log('Window height is ' + window.innerHeight);
+      // console.log('Bottom marrgin height is ' + margin.bottom);
+      console.log('Chart controls height is ' + chartControlsTotalHeight);
+      // console.log('Calculated newHeight should be ' + newHeight);
+      // console.log(el.id);
+
+
     } else if(isXL){
+      // The default, non-full-screen resizing, which checks for special layout at XL breakpoint
       wrapperStyles = window.getComputedStyle(chartControlsWrapper);
       newWidth = (newWidth - filtersPanel.offsetWidth - parseInt(wrapperStyles.marginLeft));
     }
 
-    if(Math.abs(newWidth - width) > 5){
+    // Height math needed for when mobile resize doesn't cause change in width
+    if((Math.abs(newWidth - width) > 5) || (Math.abs(newHeight - height) > 5)){
+    // if(Math.abs(newWidth - width) > 5){
+
       width = d3.max([newWidth, 0]);
       height = d3.max([newHeight, 0]);
 
@@ -536,7 +559,7 @@ const ComparablesChart = (() => {
   function formatYTicks($ticks){
     $ticks.each(function(t,i) {
       let $tick = d3.select(this);
-      $tick.select('text').attr('dx', 18);
+      $tick.select('text').attr('dx', 4);
 
       if(i === 0){
         $tick.select('text').attr('dy', -2);

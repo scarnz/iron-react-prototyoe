@@ -16,7 +16,7 @@ class ChartFiltersWrapper extends React.Component {
           this.props.classNameCruncher(this.props.fullScreen ?
             'full-screen'
             : '',
-            'relative bg-white flex flex-col xl:flex-row xl:flex-row-reverse xl:justify-end mx-2 sm:mx-0 mt-[13px]'
+            'relative bg-white flex flex-col xl:flex-row xl:flex-row-reverse xl:justify-end mx-2 sm:mx-0'
           )
         }
       >

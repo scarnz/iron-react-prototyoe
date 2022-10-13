@@ -5,7 +5,7 @@ export default function Filters() {
     <>
 
       {/* Filters Panel */}
-      <aside id="filtersPanel" className="relative xl:w-84 xl:flex-shrink-0 hidden md:flex flex-col bg-gray-100 border border-slate-200 border-b-slate-100 rounded-md xl:max-w-[221px] xl:pb-2 mb-6">
+      <aside id="filtersPanel" className="relative xl:w-84 xl:flex-shrink-0 hidden md:flex flex-col bg-gray-100 border border-slate-200 border-b-slate-100 rounded-md xl:max-w-[221px] xl:pb-2 xl:mt-[0.8125rem] mb-6">
           
         <div className="flex-col sm:flex sm:flex-row xl:flex-col justify-between sm:items-center xl:items-start px-3 pt-1 sm:pt-0 xl:pt-2">
           <label htmlFor="" className="flex-shrink-0 mb-2 md:mb-0 xl:mb-0 mr-3 text-sm text-gray-700 font-medium">
@@ -14,7 +14,7 @@ export default function Filters() {
           </label>
 
           <div id="activeFilters" className="flex flex-wrap items-center w-full gap-x-2 gap-y-2 xl:border-b border-gray-200 mt-2 pb-2 xl:pb-3">
-            <span className="flex items-center rounded-full bg-gray-200 border border-blue-200 py-1 pl-4 pr-1 text-xs font-medium text-gray-600">
+{/*            <span className="flex items-center rounded-full bg-gray-200 border border-blue-200 py-1 pl-4 pr-1 text-xs font-medium text-gray-600">
               <span>200 HP</span>
               <button type="button" className="ml-1 inline-flex items-center justify-center h-6 w-6 flex-shrink-0 rounded-full text-gray-400 hover:bg-white hover:text-gray-500">
                 <span className="sr-only">Remove this filter</span>
@@ -23,7 +23,7 @@ export default function Filters() {
                 </svg>
               </button>
             </span>
-
+*/}
             {/*<span className="flex items-center rounded-full bg-gray-200 border border-blue-200 py-1 pl-4 pr-1 text-xs font-medium text-gray-600">
               <span>Lorem Ipsum</span>
               <button type="button" className="ml-1 inline-flex items-center justify-center h-6 w-6 flex-shrink-0 rounded-full text-gray-400 hover:bg-white hover:text-gray-500">

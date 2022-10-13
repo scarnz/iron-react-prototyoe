@@ -42,7 +42,7 @@ class ChartControlsWrapper extends React.Component {
             <ChartInnerLegend />
          
             {/* Chart Itself */}
-            <div id="comparablesChart" className="w-full"></div>
+            <div id="comparablesChart" className="w-full h-full"></div>
           </div>
         </div>
         {/* /End chart area */}
