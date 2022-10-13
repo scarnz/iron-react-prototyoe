@@ -14,7 +14,7 @@ import ComparablesCardAdvertised from './ComparablesCardAdvertised';
 
 const allTheTabsInfo = [
   { name: 'My Sold', href: '#', count: '10' },
-  { name: 'Auction', href: '#', count: '62' },
+  { name: 'Auction', href: '#', count: '63' },
   { name: 'Sold', href: '#', count: '95' },
   { name: 'Advertised', href: '#', count: '124' },
   { name: 'My Comparables', href: '#', count: '4' }
