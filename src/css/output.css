@@ -1417,6 +1417,16 @@ html, body {
   border-color: rgb(252 165 165 / var(--tw-border-opacity));
 }
 
+.border-green-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 239 172 / var(--tw-border-opacity));
+}
+
+.border-green-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(74 222 128 / var(--tw-border-opacity));
+}
+
 .border-b-slate-100 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(241 245 249 / var(--tw-border-opacity));
@@ -1551,8 +1561,26 @@ html, body {
   background-color: rgb(127 29 29 / var(--tw-bg-opacity));
 }
 
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+}
+
+.bg-green-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 244 / var(--tw-bg-opacity));
+}
+
 .p-4 {
   padding: 1rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .px-0 {
@@ -1618,6 +1646,11 @@ html, body {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.py-px {
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .pl-2 {
@@ -1749,6 +1782,10 @@ html, body {
   line-height: 1.5rem;
 }
 
+.text-\[10px\] {
+  font-size: 10px;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -1836,6 +1873,16 @@ html, body {
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity));
+}
+
+.text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity));
 }
 
 .underline-offset-2 {
@@ -2604,6 +2651,10 @@ html, body {
 
   .xl\:w-64 {
     width: 16rem;
+  }
+
+  .xl\:w-full {
+    width: 100%;
   }
 
   .xl\:max-w-\[221px\] {
