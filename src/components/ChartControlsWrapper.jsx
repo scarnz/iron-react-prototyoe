@@ -74,19 +74,19 @@ function drawChart(animate){
     // do stuff
   });
 
-  let updateLink = document.getElementById('chartUpdateLink');
-  if(updateLink){
-    updateLink.addEventListener('click', (e) => {
+  // let updateLink = document.getElementById('chartUpdateLink');
+  // if(updateLink){
+  //   updateLink.addEventListener('click', (e) => {
 
-      let currData = Number(e.target.getAttribute('data-dataset')),
-          newDataIndex = currData === 0 ? 1 : 0;
+  //     let currData = Number(e.target.getAttribute('data-dataset')),
+  //         newDataIndex = currData === 0 ? 1 : 0;
 
-      e.target.setAttribute('data-dataset', newDataIndex);
-      ComparablesChart.update(data[newDataIndex]);
+  //     e.target.setAttribute('data-dataset', newDataIndex);
+  //     ComparablesChart.update(data[newDataIndex]);
 
-      e.preventDefault()
-    });
-  }
+  //     e.preventDefault()
+  //   });
+  // }
 }
 
 function updateChart(data){
