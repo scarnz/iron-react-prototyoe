@@ -100,7 +100,7 @@ const ComparablesChart = (() => {
       wrapperStyles = window.getComputedStyle(wrapper);
       width = (width - filtersPanel.offsetWidth - (parseInt(wrapperStyles.paddingLeft) + parseInt(wrapperStyles.paddingRight)));
     } else if(isXL){
-      wrapperStyles = window.getComputedStyle(chartControlsWrapper);
+      wrapperStyles = window.getComputedStyle(controlsWrapper);
       width = (width - filtersPanel.offsetWidth - parseInt(wrapperStyles.marginLeft));
     }
 
@@ -540,7 +540,7 @@ const ComparablesChart = (() => {
 
     } else if(isXL){
       // The default, non-full-screen resizing, which checks for special layout at XL breakpoint
-      wrapperStyles = window.getComputedStyle(chartControlsWrapper);
+      wrapperStyles = window.getComputedStyle(controlsWrapper);
       newWidth = (newWidth - filtersPanel.offsetWidth - parseInt(wrapperStyles.marginLeft));
     }
 
