@@ -141,7 +141,7 @@ const ComparablesChart = (() => {
     updateYAxis();
     updateXAxis();
     updateGrid();
-    drawLines();
+    drawLines(true);
   };
 
   //////////////////////////////
@@ -387,7 +387,7 @@ const ComparablesChart = (() => {
       .curve(d3.curveBasis);
   };
 
-  function drawLines(animate) {
+  function drawLines(animate=true) {
     console.log('CHART: draw lines. Animate:', animate);
     let lineStrokeTransition = d3.transition()
         .ease(d3.easeSin)
@@ -481,6 +481,18 @@ const ComparablesChart = (() => {
 
   function updateLines(dur=animationDuration){
     console.log('CHART: update lines');
+
+    // update the line functions with the new scales
+    advertisedLine
+      .x(d => xScale(d.publishedDate))
+      .y(d => yScale(d.advertised));
+    resaleLine
+      .x(d => xScale(d.publishedDate))
+      .y(d => yScale(d.resaleCash));
+    wholesaleLine
+      .x(d => xScale(d.publishedDate))
+      .y(d => yScale(d.wholesale));
+
     $line1.transition()
       .duration(dur)
       .ease(d3.easeLinear)
@@ -504,7 +516,6 @@ const ComparablesChart = (() => {
         newHeight = el.offsetHeight - margin.top - margin.bottom;
 
     isFullScreen = chartFiltersWrapper.classList.contains('full-screen');
-
     isXL = (document.body.clientWidth >= breakpoints.xl);
     
     if(isFullScreen){

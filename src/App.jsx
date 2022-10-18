@@ -1,22 +1,12 @@
 import "./css/output.css";
-
 import DevTray from "./components/util/DevTray";
 import TopNav from "./components/TopNav";
 import SidebarNav from "./components/SidebarNav";
-
 import EquipSummary from "./components/EquipSummary";
-
 import Header from "./components/Header";
-
 import ChartValuesTabs from "./components/ChartValuesTabs";
-
 import ComparablesCardTabs from "./components/ComparablesCardTabs";
-
 import Footer from "./components/Footer";
-
-
-
-
 
 export default function App() {
   return (
