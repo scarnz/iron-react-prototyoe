@@ -1,10 +1,11 @@
 // requires D3 v7+
 const ComparablesChart = (() => {
   let _chartInitialized = false,
-      _baseDate,
+      _modelData,
       _depreciationData,
-      _forecastData,
-      _chartCurrencyAbbr;
+      _comparablesData,
+      _chartCurrencyAbbr,
+      timestampParse = d3.timeParse('/Date(%Q%Z)/');
 
   // define/scope some UI vars
   let $svg,
@@ -12,6 +13,9 @@ const ComparablesChart = (() => {
       $line1,
       $line2,
       $line3,
+      $circles1,
+      $circles2,
+      $circles3,
       $xAxis,
       $yAxis,
       $xAxisGrid,
@@ -79,8 +83,10 @@ const ComparablesChart = (() => {
       console.log('CHART: ELEMENT CANNOT BE NULL');
       return false;
     }
+
     // emptyElement(element);
     // if(_chartInitialized) return false;
+
     console.log('CHART: init');
 
     _chartInitialized = true;
@@ -119,6 +125,7 @@ const ComparablesChart = (() => {
     drawYAxis();
     drawXAxis();
     drawLines(animate);
+    drawScatterPlot(animate);
 
     // listeners
     chartFiltersWrapper.addEventListener('chartResize', (e) => {
@@ -136,12 +143,15 @@ const ComparablesChart = (() => {
     $line2.remove();
     $line3.remove();
 
+    $chart.selectAll('circle').remove();
+
     setData(data);
     setScales();
     updateYAxis();
     updateXAxis();
     updateGrid();
     drawLines(true);
+    drawScatterPlot(true);
   };
 
   //////////////////////////////
@@ -163,7 +173,7 @@ const ComparablesChart = (() => {
       return a.publishedDate - b.publishedDate;
     });
 
-    _forecastData = {
+    let forecastData = {
       publishedProductValueId: 0,
       issueId: 0,
       issueName: curveData.threeMonthForecast.issueName,
@@ -173,9 +183,19 @@ const ComparablesChart = (() => {
       advertised: Number(curveData.threeMonthForecast.advertised),
     };
 
-    _depreciationData.push(_forecastData);
+    _depreciationData.push(forecastData);
+    _modelData = curveData.productSpecs;
 
-    _baseData = curveData.productSpecs;
+    data.comparables.forEach((d) => {
+      let string = d.listDate || d.soldDate;
+      d.timestamp = timestampParse(string).getTime();
+    });
+
+    _comparablesData = {
+      advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
+      auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
+      sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
+    };
   };
 
   function setScales(){
@@ -274,7 +294,7 @@ const ComparablesChart = (() => {
     console.log('CHART: draw Y axis');
     yAxisFn = d3.axisRight(yScale)
       .tickValues(yAxisTicks)
-      .tickFormat(n => `${_baseData.baseCurrency[0]}$${d3.format("~s")(n)}`)
+      .tickFormat(n => `${_modelData.baseCurrency[0]}$${d3.format("~s")(n)}`)
       .tickSize(0);
 
     $yAxis = $chart.append('g')
@@ -479,6 +499,35 @@ const ComparablesChart = (() => {
     // });
   };
 
+  function drawScatterPlot(animate){
+    $chart.selectAll('circle').remove();
+    Object.keys(_comparablesData).forEach((type) => {
+      Object.keys(_comparablesData[type]).forEach((timestamp) => {
+        let date = new Date(Number(timestamp));
+        $chart.selectAll(`.dot`)
+          .data(_comparablesData[type][timestamp])
+          .enter().append('circle')
+          .attr('class', `${type}`)
+          .attr('r', 5)
+          .attr('cx', d => xScale(new Date(d.timestamp)))
+          .attr('cy', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
+          .style('opacity', 0);
+      });
+    });
+
+    if(animate){
+      $chart.selectAll('circle')
+        .transition()
+          .delay(animationDuration)
+          .duration(animationDuration)
+          .ease(d3.easeLinear)
+            .style('opacity', 1);
+    } else {
+      $chart.selectAll('circle')
+        .style('opacity', 1);
+    }
+  };
+
   function updateLines(dur=animationDuration){
     console.log('CHART: update lines');
 
@@ -563,6 +612,7 @@ const ComparablesChart = (() => {
       resizeXAxis();
       updateGrid();
       updateLines();
+      drawScatterPlot(true);
     }
   };
 
@@ -650,6 +700,15 @@ const ComparablesChart = (() => {
     children.forEach(function(child){
       el.removeChild(child);
     })
+  };
+
+  function groupArrayBy(array, key){
+      return array.reduce((objectsByKeyValue, obj) => {
+        let value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+      },{}
+    );
   };
 
   return {
