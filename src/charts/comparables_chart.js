@@ -191,11 +191,13 @@ const ComparablesChart = (() => {
       d.timestamp = timestampParse(string).getTime();
     });
 
-    _comparablesData = {
-      advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
-      auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
-      sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
-    };
+    // _comparablesData = {
+    //   advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
+    //   auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
+    //   sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
+    // };
+
+    _comparablesData = data.comparables;
   };
 
   function setScales(){
@@ -500,30 +502,69 @@ const ComparablesChart = (() => {
   };
 
   function drawScatterPlot(animate){
-    $chart.selectAll('circle').remove();
-    Object.keys(_comparablesData).forEach((type) => {
-      Object.keys(_comparablesData[type]).forEach((timestamp) => {
-        let date = new Date(Number(timestamp));
-        $chart.selectAll(`.dot`)
-          .data(_comparablesData[type][timestamp])
-          .enter().append('circle')
-          .attr('class', `${type}`)
-          .attr('r', 5)
-          .attr('cx', d => xScale(new Date(d.timestamp)))
-          .attr('cy', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
-          .style('opacity', 0);
-      });
-    });
+    let date;
+    $chart.selectAll('.plot-advertised').remove();
+    $chart.selectAll('.plot-auction').remove();
+    $chart.selectAll('.plot-sold').remove();
+
+    $chart.selectAll(`.plot-advertised`)
+      .data(_comparablesData.filter(d => d.comparableType === 'ACTIVE_LISTING'))
+      .enter().append('circle')
+      .attr('class', `plot-advertised`)
+      .attr('r', 8)
+      .attr('cx', d => xScale(new Date(d.timestamp)))
+      .attr('cy', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
+      .attr('fill', 'rgb(251 191 36)')
+      .style('opacity', 0);
+
+    $chart.selectAll(`.plot-auction`)
+      .data(_comparablesData.filter(d => d.comparableType === 'AUCTION_REPORT'))
+      .enter().append('rect')
+      .attr('class', `plot-auction`)
+      .attr('width', 10)
+      .attr('height', 10)
+      .attr('x', d => xScale(new Date(d.timestamp)))
+      .attr('y', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
+      .attr('stroke', 'rgb(125 211 252)')
+      .attr('stroke-width', 3)
+      .attr('fill', 'white')
+      .style('opacity', 0);
+
+    $chart.selectAll(`.plot-sold`)
+      .data(_comparablesData.filter(d => d.comparableType === 'SOLD_REPORT'))
+      .enter().append('rect')
+      .attr('class', `plot-sold`)
+      .attr('width', 13)
+      .attr('height', 13)
+      .attr('transform', d => `translate(${xScale(new Date(d.timestamp)) + 6}, ${yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice)}) rotate(45)`)
+      .attr('fill', 'rgb(248 113 113)')
+      .style('opacity', 0);
 
     if(animate){
-      $chart.selectAll('circle')
+      $chart.selectAll('.plot-advertised')
+        .transition()
+          .delay(animationDuration)
+          .duration(animationDuration)
+          .ease(d3.easeLinear)
+            .style('opacity', 1);
+      $chart.selectAll('.plot-auction')
+        .transition()
+          .delay(animationDuration)
+          .duration(animationDuration)
+          .ease(d3.easeLinear)
+            .style('opacity', 1);
+      $chart.selectAll('.plot-sold')
         .transition()
           .delay(animationDuration)
           .duration(animationDuration)
           .ease(d3.easeLinear)
             .style('opacity', 1);
     } else {
-      $chart.selectAll('circle')
+      $chart.selectAll('.plot-advertised')
+        .style('opacity', 1);
+      $chart.selectAll('.plot-auction')
+        .style('opacity', 1);
+      $chart.selectAll('.plot-sold')
         .style('opacity', 1);
     }
   };
