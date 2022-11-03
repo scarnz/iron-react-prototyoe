@@ -28,7 +28,11 @@ const ComparablesChart = (() => {
       greyLight = '#e5e7eb',
       greyMedium = '#9ca3af',
       amberMedium = '#FBBF24',
-      redMedium = '#F87171';
+      redMedium = '#F87171',
+      strokeOpacity = '0.8',
+      dotStartOpacity = '0',
+      dotEndOpacity = '0.95';
+
 
   // define/scope some dimension vars
   let el,
@@ -418,6 +422,7 @@ const ComparablesChart = (() => {
       .datum(_depreciationData)
       .attr('class', 'line advertised')
       .attr('fill', 'none')
+      .attr('opacity', strokeOpacity)
       .attr('stroke', amberMedium)
       .attr('stroke-width', lineStrokeWidth)
       .attr('stroke-linejoin', 'round')
@@ -428,6 +433,7 @@ const ComparablesChart = (() => {
       .datum(_depreciationData)
       .attr('class', 'line resale')
       .attr('fill', 'none')
+      .attr('opacity', strokeOpacity)
       .attr('stroke', redMedium)
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
@@ -438,6 +444,7 @@ const ComparablesChart = (() => {
       .datum(_depreciationData)
       .attr('class', 'line advertised')
       .attr('fill', 'none')
+      .attr('opacity', strokeOpacity)
       .attr('stroke', blueMedium)
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
@@ -515,7 +522,7 @@ const ComparablesChart = (() => {
       .attr('cx', d => xScale(new Date(d.timestamp)))
       .attr('cy', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
       .attr('fill', 'rgb(251 191 36)')
-      .style('opacity', 0);
+      .style('opacity', dotStartOpacity);
 
     $chart.selectAll(`.plot-auction`)
       .data(_comparablesData.filter(d => d.comparableType === 'AUCTION_REPORT'))
@@ -528,7 +535,7 @@ const ComparablesChart = (() => {
       .attr('stroke', 'rgb(125 211 252)')
       .attr('stroke-width', 3)
       .attr('fill', 'white')
-      .style('opacity', 0);
+      .style('opacity', dotStartOpacity);
 
     $chart.selectAll(`.plot-sold`)
       .data(_comparablesData.filter(d => d.comparableType === 'SOLD_REPORT'))
@@ -538,7 +545,7 @@ const ComparablesChart = (() => {
       .attr('height', 13)
       .attr('transform', d => `translate(${xScale(new Date(d.timestamp)) + 6}, ${yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice)}) rotate(45)`)
       .attr('fill', 'rgb(248 113 113)')
-      .style('opacity', 0);
+      .style('opacity', dotStartOpacity);
 
     if(animate){
       $chart.selectAll('.plot-advertised')
@@ -546,19 +553,19 @@ const ComparablesChart = (() => {
           .delay(animationDuration)
           .duration(animationDuration)
           .ease(d3.easeLinear)
-            .style('opacity', 1);
+            .style('opacity', dotEndOpacity);
       $chart.selectAll('.plot-auction')
         .transition()
           .delay(animationDuration)
           .duration(animationDuration)
           .ease(d3.easeLinear)
-            .style('opacity', 1);
+            .style('opacity', dotEndOpacity);
       $chart.selectAll('.plot-sold')
         .transition()
           .delay(animationDuration)
           .duration(animationDuration)
           .ease(d3.easeLinear)
-            .style('opacity', 1);
+            .style('opacity', dotEndOpacity);
     } else {
       $chart.selectAll('.plot-advertised')
         .style('opacity', 1);
