@@ -20,52 +20,52 @@
         "issueId": 1663,
         "issueName": "Fall 2022",
         "publishedDate": "2022-09-01T00:00:00",
-        "wholesale": 127900,
-        "resaleCash": 180170,
-        "advertised": 187370
+        "wholesale": 372370,
+        "resaleCash": 426980,
+        "advertised": 444060
       },
       {
         "publishedProductValueId": 14098479,
         "issueId": 1656,
         "issueName": "Summer 2022",
         "publishedDate": "2022-06-01T00:00:00",
-        "wholesale": 128080,
-        "resaleCash": 180410,
-        "advertised": 187620
+        "wholesale": 371230,
+        "resaleCash": 425750,
+        "advertised": 442780
       },
       {
         "publishedProductValueId": 13859326,
         "issueId": 1649,
         "issueName": "Spring 2022",
         "publishedDate": "2022-03-01T00:00:00",
-        "wholesale": 126400,
-        "resaleCash": 178090,
-        "advertised": 185210
+        "wholesale": 381610,
+        "resaleCash": 436910,
+        "advertised": 454390
       },
       {
         "publishedProductValueId": 13572115,
         "issueId": 1603,
         "issueName": "Winter 2021",
         "publishedDate": "2021-12-01T00:00:00",
-        "wholesale": 127330,
-        "resaleCash": 179380,
-        "advertised": 186550
+        "wholesale": 380130,
+        "resaleCash": 435320,
+        "advertised": 452730
       },
       {
         "publishedProductValueId": 13338896,
         "issueId": 1596,
         "issueName": "Fall 2021",
         "publishedDate": "2021-09-01T00:00:00",
-        "wholesale": 132080,
-        "resaleCash": 185630,
-        "advertised": 193050
+        "wholesale": 380130,
+        "resaleCash": 435320,
+        "advertised": 452730
       }
     ],
     "threeMonthForecast": {
       "issueName": "Three Month Forecast",
-      "wholesale": 125450,
-      "resaleCash": 176720,
-      "advertised": 183789
+      "wholesale": 371315,
+      "resaleCash": 425770,
+      "advertised": 445770
     }
   },
   "comparables": [
