@@ -196,9 +196,9 @@ const ComparablesChart = (() => {
     });
 
     // _comparablesData = {
-    //   advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
-    //   auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
-    //   sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
+      // advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
+      // auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
+      // sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
     // };
 
     _comparablesData = data.comparables;
@@ -213,10 +213,17 @@ const ComparablesChart = (() => {
         minResale = d3.min(_depreciationData, (d) => d.resaleCash),
         minWholesale = d3.min(_depreciationData, (d) => d.wholesale);
 
-    let yMax = d3.max([maxAdvertised,maxResale,maxWholesale]),
-        yMin = d3.min([minAdvertised,minResale,minWholesale]),
-        yMaxTick = (yMax+yTickResolution)-(yMax%yTickResolution);
-        yMinTick = yMin-(yMin%yTickResolution);
+    let yMax = d3.max([
+          d3.max(_comparablesData.map(d => typeof(d.soldPrice) === 'undefined' ? d.listPrice : d.soldPrice)),
+          d3.max([maxAdvertised,maxResale,maxWholesale])
+        ]),
+        yMin = d3.min([
+          d3.min(_comparablesData.map(d => typeof(d.soldPrice) === 'undefined' ? d.listPrice : d.soldPrice)),
+          d3.min([maxAdvertised,maxResale,maxWholesale])
+        ]),
+        yMaxTick = (yMax+yTickResolution)-(yMax%yTickResolution),
+        yMinTick = (yMin-yTickResolution)-(yMin%yTickResolution);
+        // yMinTick = 0;
 
     yScale = d3.scaleLinear()
       .range([height, 0])
@@ -520,7 +527,7 @@ const ComparablesChart = (() => {
       .attr('class', `plot-advertised`)
       .attr('r', 8)
       .attr('cx', d => xScale(new Date(d.timestamp)))
-      .attr('cy', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
+      .attr('cy', d => yScale(typeof(d.soldPrice) === 'undefined' ? d.listPrice : d.soldPrice))
       .attr('fill', 'rgb(251 191 36)')
       .style('opacity', dotStartOpacity);
 
@@ -531,7 +538,7 @@ const ComparablesChart = (() => {
       .attr('width', 10)
       .attr('height', 10)
       .attr('x', d => xScale(new Date(d.timestamp)))
-      .attr('y', d => yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice))
+      .attr('y', d => yScale(typeof(d.soldPrice) === 'undefined' ? d.listPrice : d.soldPrice))
       .attr('stroke', 'rgb(125 211 252)')
       .attr('stroke-width', 3)
       .attr('fill', 'white')
@@ -543,7 +550,7 @@ const ComparablesChart = (() => {
       .attr('class', `plot-sold`)
       .attr('width', 13)
       .attr('height', 13)
-      .attr('transform', d => `translate(${xScale(new Date(d.timestamp)) + 6}, ${yScale(typeof(d.listPrice) === 'undefined' ? d.soldPrice : d.listPrice)}) rotate(45)`)
+      .attr('transform', d => `translate(${xScale(new Date(d.timestamp)) + 6}, ${yScale(typeof(d.soldPrice) === 'undefined' ? d.listPrice : d.soldPrice)}) rotate(45)`)
       .attr('fill', 'rgb(248 113 113)')
       .style('opacity', dotStartOpacity);
 
