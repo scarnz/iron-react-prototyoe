@@ -29,9 +29,10 @@ const ComparablesChart = (() => {
       greyMedium = '#9ca3af',
       amberMedium = '#FBBF24',
       redMedium = '#F87171',
-      strokeOpacity = '0.8',
+      strokeOpacity = '1',
       dotStartOpacity = '0',
-      dotEndOpacity = '0.95';
+      dotEndOpacity = '0.4';
+      dotEndOpacityAuction = '0.9';
 
 
   // define/scope some dimension vars
@@ -566,7 +567,7 @@ const ComparablesChart = (() => {
           .delay(animationDuration)
           .duration(animationDuration)
           .ease(d3.easeLinear)
-            .style('opacity', dotEndOpacity);
+            .style('opacity', dotEndOpacityAuction);
       $chart.selectAll('.plot-sold')
         .transition()
           .delay(animationDuration)
