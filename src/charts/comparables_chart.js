@@ -230,9 +230,12 @@ const ComparablesChart = (() => {
       .range([height, 0])
       .domain([yMinTick, yMaxTick]);
 
+    let [compStartDate, compEndDate] = d3.extent(_comparablesData, (d) => new Date(d.timestamp)),
+        [deprStartDate, deprEndDate] = d3.extent(_depreciationData, (d) => d.publishedDate);
+
     xScale = d3.scaleTime()
       .range([0, width])
-      .domain(d3.extent(_depreciationData, (d) => d.publishedDate));
+      .domain([d3.min([compStartDate, deprStartDate]), d3.max([compEndDate, deprEndDate])]);
 
     yAxisTicks = d3.range(yMinTick,(yMaxTick+yTickResolution),yTickResolution)
     xAxisTicks = d3.timeMonths(xScale.domain()[0], xScale.domain()[1], 3);
