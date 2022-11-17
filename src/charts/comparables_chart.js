@@ -31,7 +31,7 @@ const ComparablesChart = (() => {
       redMedium = '#F87171',
       strokeOpacity = '1',
       dotStartOpacity = '0',
-      dotEndOpacity = '0.4';
+      dotEndOpacity = '0.5';
       dotEndOpacityAuction = '0.9';
 
 

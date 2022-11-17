@@ -1,11 +1,11 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import ChartControls from './ChartControls';
-import ChartInnerLegend from './ChartInnerLegend';
+// import ChartControls from './ChartControls';
+// import ChartInnerLegend from './ChartInnerLegend';
 
-function classNameCruncher(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+// function classNameCruncher(...classes) {
+//   return classes.filter(Boolean).join(' ');
+// }
 
 class ChartControlsWrapper extends React.Component {
   constructor(props){
@@ -31,15 +31,15 @@ class ChartControlsWrapper extends React.Component {
             className='relative xl:ml-3 bg-white w-full h-full flex flex-col'
         >
 
-          <ChartControls
+          {/*<ChartControls
             fullScreen={this.props.fullScreen}
             toggleFullscreen={this.props.toggleFullscreen}
-          />
+          />*/}
 
           {/* Chart Height Wrapper */}
           <div id="heightWrapper" className="relative h-80 md:h-96 xl:h-108 mb-6">
             
-            <ChartInnerLegend />
+            {/*<ChartInnerLegend />*/}
          
             {/* Chart Itself */}
             <div id="comparablesChart" className="w-full h-full"></div>
