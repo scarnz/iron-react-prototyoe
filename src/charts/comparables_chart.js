@@ -4,8 +4,7 @@ const ComparablesChart = (() => {
       _modelData,
       _depreciationData,
       _comparablesData,
-      _chartCurrencyAbbr,
-      timestampParse = d3.timeParse('/Date(%Q%Z)/');
+      _chartCurrencyAbbr;
 
   // define/scope some UI vars
   let $svg,
@@ -34,7 +33,6 @@ const ComparablesChart = (() => {
       dotEndOpacity = '0.4';
       dotEndOpacityAuction = '0.9';
 
-
   // define/scope some dimension vars
   let el,
       chartFiltersWrapper,
@@ -55,7 +53,9 @@ const ComparablesChart = (() => {
   // d3 vars
   let yTickResolution = 50000,
       xTickResolution = 3,
-      timeParser = d3.timeParse("%Y-%m-%dT%H:%M:%S"),
+      timestampParse = d3.timeParse('/Date(%Q%Z)/'),
+      ymdParse = d3.timeParse('%Y-%m-%d'),
+      dateTimeParse = d3.timeParse("%Y-%m-%dT%H:%M:%S"),
       fullDateFormat = d3.timeFormat("%Y-%m-%d"),
       xScale,
       yScale,
@@ -95,7 +95,7 @@ const ComparablesChart = (() => {
     console.log('CHART: init');
 
     _chartInitialized = true;
-    setData(data);
+    setBaseData(data);
 
     el = element;
     chartFiltersWrapper = document.getElementById('chartFiltersWrapper');
@@ -116,6 +116,8 @@ const ComparablesChart = (() => {
     }
 
     setScales();
+    setForecastData(data);
+
     setLines();
 
     $svg = d3.select(el).append('svg')
@@ -150,8 +152,9 @@ const ComparablesChart = (() => {
 
     $chart.selectAll('circle').remove();
 
-    setData(data);
+    setBaseData(data);
     setScales();
+    setForecastData(data);
     updateYAxis();
     updateXAxis();
     updateGrid();
@@ -161,14 +164,14 @@ const ComparablesChart = (() => {
 
   //////////////////////////////
   // PRIVATE
-  function setData(data){
+  function setBaseData(data){
     let curveData = data.depreciationCurveData;
     _depreciationData = curveData.publishedValues.map((d) => {
       return {
         publishedProductValueId: Number(d.publishedProductValueId),
         issueId: Number(d.issueId),
         issueName: d.issueName,
-        publishedDate: timeParser(d.publishedDate),
+        publishedDate: dateTimeParse(d.publishedDate),
         wholesale: Number(d.wholesale),
         resaleCash: Number(d.resaleCash),
         advertised: Number(d.advertised),
@@ -178,17 +181,6 @@ const ComparablesChart = (() => {
       return a.publishedDate - b.publishedDate;
     });
 
-    let forecastData = {
-      publishedProductValueId: 0,
-      issueId: 0,
-      issueName: curveData.threeMonthForecast.issueName,
-      publishedDate: d3.timeMonth.offset(_depreciationData[_depreciationData.length-1].publishedDate,3),
-      wholesale: Number(curveData.threeMonthForecast.wholesale),
-      resaleCash: Number(curveData.threeMonthForecast.resaleCash),
-      advertised: Number(curveData.threeMonthForecast.advertised),
-    };
-
-    _depreciationData.push(forecastData);
     _modelData = curveData.productSpecs;
 
     data.comparables.forEach((d) => {
@@ -196,14 +188,23 @@ const ComparablesChart = (() => {
       d.timestamp = timestampParse(string).getTime();
     });
 
-    // _comparablesData = {
-      // advertised: groupArrayBy(data.comparables.filter(d => d.comparableType === 'ACTIVE_LISTING'), 'timestamp'),
-      // auction: groupArrayBy(data.comparables.filter(d => d.comparableType === 'AUCTION_REPORT'), 'timestamp'),
-      // sold: groupArrayBy(data.comparables.filter(d => d.comparableType === 'SOLD_REPORT'), 'timestamp'),
-    // };
-
     _comparablesData = data.comparables;
   };
+
+  function setForecastData(data){
+    let curveData = data.depreciationCurveData,
+        forecastData = {
+          publishedProductValueId: 0,
+          issueId: 0,
+          issueName: curveData.threeMonthForecast.issueName,
+          publishedDate: xScale.domain()[1],
+          wholesale: Number(curveData.threeMonthForecast.wholesale),
+          resaleCash: Number(curveData.threeMonthForecast.resaleCash),
+          advertised: Number(curveData.threeMonthForecast.advertised),
+        };
+
+    _depreciationData.push(forecastData);
+  }
 
   function setScales(){
     console.log('CHART: set scales');
@@ -224,7 +225,6 @@ const ComparablesChart = (() => {
         ]),
         yMaxTick = (yMax+yTickResolution)-(yMax%yTickResolution),
         yMinTick = (yMin-yTickResolution)-(yMin%yTickResolution);
-        // yMinTick = 0;
 
     yScale = d3.scaleLinear()
       .range([height, 0])
@@ -233,13 +233,18 @@ const ComparablesChart = (() => {
     let [compStartDate, compEndDate] = d3.extent(_comparablesData, (d) => new Date(d.timestamp)),
         [deprStartDate, deprEndDate] = d3.extent(_depreciationData, (d) => d.publishedDate);
 
+    let dataStartDate = d3.min([compStartDate, deprStartDate]),
+        dataEndDate = d3.max([compEndDate, deprEndDate]),
+        chartStartDate = quarterMonthBoundaries(dataStartDate)[0],
+        chartEndDate = d3.timeMonth.offset(quarterMonthBoundaries(dataEndDate)[1], 1); // always add a month?
+
     xScale = d3.scaleTime()
       .range([0, width])
-      .domain([d3.min([compStartDate, deprStartDate]), d3.max([compEndDate, deprEndDate])]);
+      .domain([chartStartDate, chartEndDate]);
 
     yAxisTicks = d3.range(yMinTick,(yMaxTick+yTickResolution),yTickResolution)
-    xAxisTicks = d3.timeMonths(xScale.domain()[0], xScale.domain()[1], 3);
-    xAxisTicks.push(xScale.domain()[1]);
+    xAxisTicks = d3.timeMonths(chartStartDate, chartEndDate, 3);
+    xAxisTicks.push(chartEndDate);
   };
 
   function updateScales(){
@@ -255,10 +260,10 @@ const ComparablesChart = (() => {
     // grid rectangle
     bandWidth = width/(xScale.ticks().length-1);
     $gridRect = $chart.append('rect')
-     .attr('x', width - (bandWidth*3) - 2)
+     .attr('x', width - (bandWidth*3))
      .attr('y', 0)
      .attr('height', height)
-     .attr('width',  (bandWidth*3) + 2)
+     .attr('width',  (bandWidth*3))
      .attr('fill', blueLight);
 
     // grid lines
@@ -288,7 +293,7 @@ const ComparablesChart = (() => {
     xAxisFn = d3.axisBottom(xScale)
       .tickValues(xAxisTicks)
       .tickSize(0)
-      .tickFormat(d => monthAsSeason(Number(fullDateFormat(d).split('-')[1])));
+      .tickFormat(d => monthAsSeason(d.getMonth() + 1));
 
     $xAxis = $chart.append('g')
       .attr('transform', `translate(${0}, ${height})`)
@@ -337,10 +342,10 @@ const ComparablesChart = (() => {
     $gridRect.transition()
       .ease(d3.easeLinear)
       .duration(dur)
-      .attr('x', width - (bandWidth*3) - 2)
+      .attr('x', width - (bandWidth*3))
       .attr('y', 0)
       .attr('height', height)
-      .attr('width',  (bandWidth*3) + 2);
+      .attr('width',  (bandWidth*3));
 
     // grid lines
     $xAxisGrid.transition()
@@ -707,6 +712,7 @@ const ComparablesChart = (() => {
         year = 'FORECAST';
       } else {
         season = monthAsSeason(Number(y_m_d[1]));
+        // season = y_m_d[1];
         year = y_m_d[0];
       }
 
@@ -751,6 +757,35 @@ const ComparablesChart = (() => {
     } else {
       return '-';
     }
+  };
+
+  function quarterMonthBoundaries(date){
+    let month = (date.getMonth() + 1),
+        quarterStartMonth,
+        quarterEndMonth;
+
+    // get the start month and end month of the date's quarter
+    if([12,1,2].includes(month)){
+      quarterStartMonth = 12;
+      quarterEndMonth = 2;
+    } else if([3,4,5].includes(month)){
+      quarterStartMonth = 3;
+      quarterEndMonth = 5;
+    } else if([6,7,8].includes(month)){
+      quarterStartMonth = 6;
+      quarterEndMonth = 8;
+    } else if([9,10,11].includes(month)){
+      quarterStartMonth = 9;
+      quarterEndMonth = 11;
+    } else {
+      quarterStartMonth = 1;
+      quarterEndMonth = 3;
+    }
+
+    let startDate = ymdParse(`${date.getFullYear()}-${quarterStartMonth}-01`),
+        endDate = ymdParse(`${date.getFullYear()}-${quarterEndMonth}-01`);
+
+    return [startDate, endDate];
   };
 
   // UTILITIES
